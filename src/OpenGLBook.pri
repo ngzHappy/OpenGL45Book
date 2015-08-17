@@ -14,7 +14,7 @@ APPProjectModel.file = $$PWD/ProjectModel/ProjectModel.pro
 APPProjectModel.depends += SLIBOpenGLTool
 
 APPTemplateApplicaton.file = $$PWD/TemplateApplicaton/TemplateApplicaton.pro
-APPTemplateApplicaton.depends += APPVoidTest
+APPTemplateApplicaton.depends += SLIBOpenGLTool
 
 APPSimpleBuffer.file = $$PWD/SimpleBuffer/SimpleBuffer.pro
 APPSimpleBuffer.depends += SLIBOpenGLTool
