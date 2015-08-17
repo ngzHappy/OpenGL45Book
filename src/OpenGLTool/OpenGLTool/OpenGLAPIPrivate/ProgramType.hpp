@@ -2,10 +2,7 @@
 #ifndef __PROGRAMTYPE____OPENGL__API__PRIVATE__0x00
 #define __PROGRAMTYPE____OPENGL__API__PRIVATE__0x00
 
-#include "BaseType.hpp"
-#include "VertexArrayType.hpp"
-#include "TexttureOpenglTool.hpp"
-#include "FBOTypeGL.hpp"
+#include "GLUnamedObject.hxx"
 
 namespace gl {
 
@@ -21,7 +18,9 @@ namespace gl {
 //glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, (GLuint)thisp->testBuffer);
 //void glBindImageTexture
 
-class Program{
+class Program
+        :public __UnNamedObject
+{
     union{
     UnsignedInteger program_ ;
     UnsignedInteger value_ ;
@@ -52,43 +51,6 @@ public:
         glUseProgram(program_);
         return ans;
     }
-
-/*
- * 语义连接
-*/
-	static inline void bindVertexArray(const NamedVertexArrayObject & v) {
-		/* layout(location = 0) in vec3 vPositon; */
-		v.bind();
-	}
-
-	/* 
-	layout (binding = 0) uniform sampler2DMS input_image; 
-	GL_TEXTURE_1D 
-	GL_TEXTURE_2D 
-	GL_TEXTURE_3D 
-	GL_TEXTURE_1D_ARRAY 
-	GL_TEXTURE_2D_ARRAY 
-	GL_TEXTURE_RECTANGLE 
-	GL_TEXTURE_CUBE_MAP 
-	GL_TEXTURE_CUBE_MAP_ARRAY 
-	GL_TEXTURE_BUFFER 
-	GL_TEXTURE_2D_MULTISAMPLE  
-	GL_TEXTURE_2D_MULTISAMPLE_ARRAY
-	*/
-	static inline void bindTexture(
-		const NamedTexture & v,
-		GLuint location /* 0 1 2 3 4 5 ...*/,
-        GLenum target = GL_TEXTURE_RECTANGLE
-		) {
-		v.bind(location,target);
-	}
-
-	static inline void bindFrameBuffer() {
-            glBindFramebuffer(GL_FRAMEBUFFER,0);
-	}
-	static inline void bindFrameBuffer( gl::NamedFrameBufferObject obj ) {
-		glBindFramebuffer(GL_FRAMEBUFFER, (GLuint)obj);
-	}
 
 /* ----------------------------------------- */
 
