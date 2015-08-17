@@ -26,7 +26,7 @@ for parent,dirnames,filenames in os.walk(rootsrc):
 
 for filename in os.listdir(rootdir):
     ftemp,fext = os.path.splitext(filename)
-    if (fext==".py"):
+    if ((fext==".py")||(fext==".pro")):
         print filename
         zf.write(filename)
 
