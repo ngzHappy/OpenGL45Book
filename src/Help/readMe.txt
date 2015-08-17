@@ -1,0 +1,1 @@
+copy qt5.natvis to  %USERPROFILE%\Documents\Visual Studio 2015\Visualizers\
