@@ -7,6 +7,7 @@
  * glMultiDrawArrays
  * glDrawArraysIndirect glVertexAttribDivisor
 */
+#include "GLUnamedObject.hpp"
 #include "BaseType.hpp"
 namespace gl {
 
@@ -483,7 +484,7 @@ namespace  MultiDrawElementsBaseVertex {
 	typedef MultiDrawElementsBaseVertexType Type;
 	typedef MultiDrawElementsBaseVertexMode Mode;
 
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode mode;
 		const GLsizei *count;
@@ -512,7 +513,7 @@ namespace  MultiDrawElementsBaseVertex {
 namespace MultiDrawElements {
 	typedef MultiDrawElementsType Type;
 	typedef MultiDrawElementsMode Mode;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode mode;
 		const GLsizei * count;
@@ -535,7 +536,7 @@ namespace MultiDrawElements {
 
 namespace MultiDrawArrays {
 	typedef MultiDrawArraysMode Mode;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode            mode     ;
 		const GLint *   first    ;
@@ -556,7 +557,7 @@ namespace MultiDrawArrays {
 
 namespace DrawArrays {
 	typedef DrawArraysMode Mode;
-	class Pack {
+    class Pack : public UnNamedDrawObject {
 	public:
 		Mode mode;
 		Integer first;
@@ -573,7 +574,7 @@ namespace DrawArrays {
 namespace DrawElements {	
 	typedef DrawElementsMode Mode;
 	typedef DrawElementsType Type;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode mode;
 		SizeInteger count;
@@ -594,7 +595,7 @@ namespace DrawElements {
 namespace DrawArraysInstanced {
 
 	typedef DrawArraysInstancedMode Mode;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode mode;
 		Integer first;
@@ -619,7 +620,7 @@ namespace DrawArraysInstanced {
 namespace DrawArraysInstancedBaseInstance {
 	 
 	typedef DrawArraysInstancedBaseInstanceMode Mode;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode mode         ;
 		GLint first         ;
@@ -652,7 +653,7 @@ namespace DrawElementsBaseVertex {
 
 	typedef DrawElementsBaseVertexMode Mode;
 	typedef DrawElementsBaseVertexType Type;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		DrawElementsBaseVertexMode mode;
 		GLsizei count                    ;
@@ -681,7 +682,7 @@ namespace DrawElementsInstanced {
 	
 	typedef DrawElementsInstancedMode Mode;
 	typedef DrawElementsInstancedType Type;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode mode  ;
 		GLsizei count  ;
@@ -710,7 +711,7 @@ namespace DrawElementsInstancedBaseInstance {
 	 
 	typedef DrawElementsInstancedBaseInstanceMode Mode;
 	typedef DrawElementsInstancedBaseInstanceType Type;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode mode                                 ;
 		GLsizei count                             ;
@@ -739,7 +740,7 @@ namespace DrawElementsInstancedBaseVertex {
 	 
 	typedef DrawElementsInstancedBaseVertexMode Mode;
 	typedef DrawElementsInstancedBaseVertexType Type;
-	class Pack {
+    class Pack: public UnNamedDrawObject {
 	public:
 		Mode mode         ;
 		GLsizei count     ;
@@ -765,7 +766,7 @@ namespace DrawElementsInstancedBaseVertexBaseInstance {
 	 
 	typedef DrawElementsInstancedBaseVertexBaseInstanceMode Mode;
 	typedef DrawElementsInstancedBaseVertexBaseInstanceType Type;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode       mode         ;
 		GLsizei    count        ;
@@ -795,7 +796,7 @@ namespace DrawRangeElements {
 	 
 	typedef DrawRangeElementsMode Mode;
 	typedef DrawRangeElementsType Type;
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode mode;
 		GLuint start;
@@ -822,7 +823,7 @@ namespace DrawRangeElementsBaseVertex {
 	typedef DrawRangeElementsBaseVertexType Type;
 	typedef DrawRangeElementsBaseVertexMode Mode;
 
-	class Pack {
+    class Pack : public UnNamedDrawObject{
 	public:
 		Mode mode;
 		GLuint start;

@@ -53,7 +53,9 @@ public:
         return ans;
     }
 
-	/* 语义连接 */
+/*
+ * 语义连接
+*/
 	static inline void bindVertexArray(const NamedVertexArrayObject & v) {
 		/* layout(location = 0) in vec3 vPositon; */
 		v.bind();
@@ -76,7 +78,7 @@ public:
 	static inline void bindTexture(
 		const NamedTexture & v,
 		GLuint location /* 0 1 2 3 4 5 ...*/,
-		GLenum target
+        GLenum target = GL_TEXTURE_RECTANGLE
 		) {
 		v.bind(location,target);
 	}
@@ -87,6 +89,8 @@ public:
 	static inline void bindFrameBuffer( gl::NamedFrameBufferObject obj ) {
 		glBindFramebuffer(GL_FRAMEBUFFER, (GLuint)obj);
 	}
+
+/* ----------------------------------------- */
 
     Program():program_(0){}
     Program(const Program & v ):program_(v.program_){}

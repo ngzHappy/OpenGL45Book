@@ -70,7 +70,8 @@ HEADERS += \
     OpenGLTool/ModelLoaderCallbacks.hpp \
     OpenGLTool/OpenGLAPIPrivate/MultiSampleTextureRender.hpp \
     OpenGLTool/OpenGLAPIPrivate/TextureRender.hpp \
-    GLEWGL/glew.h
+    GLEWGL/glew.h \
+    OpenGLTool/OpenGLAPIPrivate/GLUnamedObject.hpp
 
 SOURCES += \
     glew.c \
