@@ -746,8 +746,8 @@ public:
 
 	boost::pool<boost::default_user_allocator_malloc_free> pointsPool;
 	ThisPrivate() :
-		pointsPool(sizeof(gl::Float6 )),
-		pointsMap(&less_than_6)
+        pointsMap(&less_than_6),
+        pointsPool(sizeof(gl::Float6 ))
 		{}
 };
 
@@ -1190,9 +1190,8 @@ class VertexTextureNormalElementCallBack::ThisPrivate {
 			boost::default_user_allocator_malloc_free
 		> pointsPool;
 
-		ThisPrivate() :
-			pointsPool(sizeof(gl::Float8)),
-			pointsMap()
+        ThisPrivate() :pointsMap(),
+            pointsPool(sizeof(gl::Float8))
 		{}
 };
 
@@ -1718,7 +1717,7 @@ saveFile(
 						qDebug() 
 							<<  "texture "\
 							<<((const char *)(textureRootPath + i.second).data())\
-							<< "can not be found!!";
+                            << " can not be found!!";
 					}
 				}
 			}
