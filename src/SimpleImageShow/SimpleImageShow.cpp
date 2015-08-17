@@ -1,6 +1,7 @@
 ﻿/*utf8 with bom*/
 #include <OpenGLTool/OpenGLAPI.hpp>
 #include <OpenGLTool/QGLTools.hpp>
+#include <OpenGLTool/QGLApplication.hpp>
 #include "SimpleImageShow.hpp"
 #include <memory>
 #include <QImage>
@@ -29,7 +30,7 @@ public:
     gl::NamedTexture texture ;
     gl::Program program ;
     gl::NamedVertexArrayObject vao;
-    std::recursive_mutex mutex;
+
     ~ThisPrivate(){
         gl::deleteAny(texture,vao,program);
 
@@ -74,7 +75,7 @@ void main(void){
     void paintGL(){
         gl::clearAll();
         if(texture){
-            auto locker = program.use(&mutex);
+            auto locker = program.use(QGLApplication::atomicFunction());
             program.bindVertexArray(vao);
             program.bindTexture(texture, 0 ,GL_TEXTURE_RECTANGLE );
             gl::drawArrays(gl::DrawArraysMode::TRIANGLE_STRIP,0,4);

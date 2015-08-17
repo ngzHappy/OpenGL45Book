@@ -112,6 +112,9 @@ APPSpider.depends+=SLIBOpenGLTool
 APPModelView.file= $$PWD/ModelView/ModelView.pro
 APPModelView.depends+=SLIBOpenGLTool
 
+APPSimpleComputeShader.file= $$PWD/SimpleComputeShader/SimpleComputeShader.pro
+APPSimpleComputeShader.depends+=SLIBOpenGLTool
+
 SUBDIRS += APPVoidTest
 SUBDIRS += LIBAssimp
 SUBDIRS += SLIBOpenGLTool
@@ -149,6 +152,12 @@ SUBDIRS += APPNormalSphere
 SUBDIRS += APPRotateNormalSphere
 SUBDIRS += APPSpider
 SUBDIRS += APPModelView
+SUBDIRS += APPSimpleComputeShader
+
+
+
+
+
 
 
 
