@@ -164,7 +164,7 @@ public:
                 indexCount,
                 Type::UNSIGNED_INT,
                 nullptr);
-            draw(pack);
+            gl::draw(pack);
         }
 
 /****************************************************/

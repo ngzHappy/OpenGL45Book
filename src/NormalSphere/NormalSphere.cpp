@@ -122,7 +122,7 @@ vao.bindElementBuffer(indexBuffer);
 			indexCount,
 			Type::UNSIGNED_INT,
 			nullptr);
-		draw(pack);
+		gl::draw(pack);
     }
 /****************************************************/
 /****************************************************/
