@@ -1,0 +1,2 @@
+
+include(src/OpenGLBook.pri)

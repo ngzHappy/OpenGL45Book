@@ -1,0 +1,385 @@
+
+CONFIG(debug,debug|release){
+DEFINES *= _DEBUG
+}else{
+DEFINES *= NDEBUG
+}
+
+
+win32-g++{
+QMAKE_CXXFLAGS += -Wno-unused-function
+QMAKE_CXXFLAGS += -Wno-ignored-qualifiers
+QMAKE_CXXFLAGS += -Wno-sign-compare
+}
+
+linux-g++{
+QMAKE_CXXFLAGS += -Wno-unused-function
+QMAKE_CXXFLAGS += -Wno-ignored-qualifiers
+QMAKE_CXXFLAGS += -Wno-sign-compare
+QMAKE_CXXFLAGS += -Wno-parentheses
+QMAKE_CXXFLAGS += -Wno-deprecated-declarations
+QMAKE_CXXFLAGS += -Wno-reorder
+}
+
+SOURCES += $$PWD/contrib/ConvertUTF/ConvertUTF.c \
+    $$PWD/contrib/clipper/clipper.cpp \
+    $$PWD/contrib/irrXML/irrXML.cpp \
+    $$PWD/contrib/unzip/ioapi.c \
+    $$PWD/contrib/poly2tri/poly2tri/sweep/advancing_front.cc \
+    $$PWD/contrib/poly2tri/poly2tri/sweep/cdt.cc \
+    $$PWD/contrib/poly2tri/poly2tri/sweep/sweep.cc \
+    $$PWD/contrib/poly2tri/poly2tri/sweep/sweep_context.cc \
+    $$PWD/contrib/poly2tri/poly2tri/common/shapes.cc \
+    $$PWD/contrib/unzip/unzip.c \
+    $$PWD/assimp/color4.inl \
+    $$PWD/assimp/material.inl \
+    $$PWD/assimp/matrix3x3.inl \
+    $$PWD/assimp/matrix4x4.inl \
+    $$PWD/assimp/quaternion.inl \
+    $$PWD/assimp/vector2.inl \
+    $$PWD/assimp/vector3.inl
+
+SOURCES += $$PWD/code/3DSConverter.cpp \
+$$PWD/code/3DSLoader.cpp \
+$$PWD/code/ACLoader.cpp \
+$$PWD/code/ASELoader.cpp \
+$$PWD/code/ASEParser.cpp \
+$$PWD/code/Assimp.cpp \
+$$PWD/code/AssimpCExport.cpp \
+$$PWD/code/AssimpPCH.cpp \
+$$PWD/code/B3DImporter.cpp \
+$$PWD/code/BaseImporter.cpp \
+$$PWD/code/BaseProcess.cpp \
+$$PWD/code/Bitmap.cpp \
+$$PWD/code/BlenderBMesh.cpp \
+$$PWD/code/BlenderDNA.cpp \
+$$PWD/code/BlenderLoader.cpp \
+$$PWD/code/BlenderModifier.cpp \
+$$PWD/code/BlenderScene.cpp \
+$$PWD/code/BlenderTessellator.cpp \
+$$PWD/code/BVHLoader.cpp \
+$$PWD/code/CalcTangentsProcess.cpp \
+$$PWD/code/COBLoader.cpp \
+$$PWD/code/ColladaExporter.cpp \
+$$PWD/code/ColladaLoader.cpp \
+$$PWD/code/ColladaParser.cpp \
+$$PWD/code/ComputeUVMappingProcess.cpp \
+$$PWD/code/ConvertToLHProcess.cpp \
+$$PWD/code/CSMLoader.cpp \
+$$PWD/code/DeboneProcess.cpp \
+$$PWD/code/DefaultIOStream.cpp \
+$$PWD/code/DefaultIOSystem.cpp \
+$$PWD/code/DefaultLogger.cpp \
+$$PWD/code/DXFLoader.cpp \
+$$PWD/code/Exporter.cpp \
+$$PWD/code/FBXAnimation.cpp \
+$$PWD/code/FBXBinaryTokenizer.cpp \
+$$PWD/code/FBXConverter.cpp \
+$$PWD/code/FBXDeformer.cpp \
+$$PWD/code/FBXDocument.cpp \
+$$PWD/code/FBXDocumentUtil.cpp \
+$$PWD/code/FBXImporter.cpp \
+$$PWD/code/FBXMaterial.cpp \
+$$PWD/code/FBXMeshGeometry.cpp \
+$$PWD/code/FBXModel.cpp \
+$$PWD/code/FBXNodeAttribute.cpp \
+$$PWD/code/FBXParser.cpp \
+$$PWD/code/FBXProperties.cpp \
+$$PWD/code/FBXTokenizer.cpp \
+$$PWD/code/FBXUtil.cpp \
+$$PWD/code/FindDegenerates.cpp \
+$$PWD/code/FindInstancesProcess.cpp \
+$$PWD/code/FindInvalidDataProcess.cpp \
+$$PWD/code/FixNormalsStep.cpp \
+$$PWD/code/GenFaceNormalsProcess.cpp \
+$$PWD/code/GenVertexNormalsProcess.cpp \
+$$PWD/code/HMPLoader.cpp \
+$$PWD/code/IFCBoolean.cpp \
+$$PWD/code/IFCCurve.cpp \
+$$PWD/code/IFCGeometry.cpp \
+$$PWD/code/IFCLoader.cpp \
+$$PWD/code/IFCMaterial.cpp \
+$$PWD/code/IFCOpenings.cpp \
+$$PWD/code/IFCProfile.cpp \
+$$PWD/code/IFCReaderGen.cpp \
+$$PWD/code/IFCUtil.cpp \
+$$PWD/code/Importer.cpp \
+$$PWD/code/ImporterRegistry.cpp \
+$$PWD/code/ImproveCacheLocality.cpp \
+$$PWD/code/IRRLoader.cpp \
+$$PWD/code/IRRMeshLoader.cpp \
+$$PWD/code/IRRShared.cpp \
+$$PWD/code/JoinVerticesProcess.cpp \
+$$PWD/code/LimitBoneWeightsProcess.cpp \
+$$PWD/code/LWOAnimation.cpp \
+$$PWD/code/LWOBLoader.cpp \
+$$PWD/code/LWOLoader.cpp \
+$$PWD/code/LWOMaterial.cpp \
+$$PWD/code/LWSLoader.cpp \
+$$PWD/code/MakeVerboseFormat.cpp \
+$$PWD/code/MaterialSystem.cpp \
+$$PWD/code/MD2Loader.cpp \
+$$PWD/code/MD3Loader.cpp \
+$$PWD/code/MD5Loader.cpp \
+$$PWD/code/MD5Parser.cpp \
+$$PWD/code/MDCLoader.cpp \
+$$PWD/code/MDLLoader.cpp \
+$$PWD/code/MDLMaterialLoader.cpp \
+$$PWD/code/MS3DLoader.cpp \
+$$PWD/code/NDOLoader.cpp \
+$$PWD/code/NFFLoader.cpp \
+$$PWD/code/ObjExporter.cpp \
+$$PWD/code/ObjFileImporter.cpp \
+$$PWD/code/ObjFileMtlImporter.cpp \
+$$PWD/code/ObjFileParser.cpp \
+$$PWD/code/OFFLoader.cpp \
+$$PWD/code/OgreBinarySerializer.cpp \
+$$PWD/code/OgreImporter.cpp \
+$$PWD/code/OgreMaterial.cpp \
+$$PWD/code/OgreStructs.cpp \
+$$PWD/code/OgreXmlSerializer.cpp \
+$$PWD/code/OptimizeGraph.cpp \
+  $$PWD/code/OptimizeMeshes.cpp \
+  $$PWD/code/PlyExporter.cpp \
+  $$PWD/code/PlyLoader.cpp \
+  $$PWD/code/PlyParser.cpp \
+  $$PWD/code/PostStepRegistry.cpp \
+  $$PWD/code/PretransformVertices.cpp \
+  $$PWD/code/ProcessHelper.cpp \
+  $$PWD/code/Q3BSPFileImporter.cpp \
+  $$PWD/code/Q3BSPFileParser.cpp \
+  $$PWD/code/Q3BSPZipArchive.cpp \
+  $$PWD/code/Q3DLoader.cpp \
+  $$PWD/code/RawLoader.cpp \
+  $$PWD/code/RemoveComments.cpp \
+  $$PWD/code/RemoveRedundantMaterials.cpp \
+  $$PWD/code/RemoveVCProcess.cpp \
+  $$PWD/code/SceneCombiner.cpp \
+  $$PWD/code/ScenePreprocessor.cpp \
+  $$PWD/code/SGSpatialSort.cpp \
+  $$PWD/code/SkeletonMeshBuilder.cpp \
+  $$PWD/code/SMDLoader.cpp \
+  $$PWD/code/SortByPTypeProcess.cpp \
+  $$PWD/code/SpatialSort.cpp \
+  $$PWD/code/SplitByBoneCountProcess.cpp \
+  $$PWD/code/SplitLargeMeshes.cpp \
+  $$PWD/code/StandardShapes.cpp \
+  $$PWD/code/STEPFileEncoding.cpp \
+  $$PWD/code/STEPFileReader.cpp \
+  $$PWD/code/STLExporter.cpp \
+  $$PWD/code/STLLoader.cpp \
+  $$PWD/code/Subdivision.cpp \
+  $$PWD/code/TargetAnimation.cpp \
+  $$PWD/code/TerragenLoader.cpp \
+  $$PWD/code/TextureTransform.cpp \
+  $$PWD/code/TriangulateProcess.cpp \
+  $$PWD/code/UnrealLoader.cpp \
+  $$PWD/code/ValidateDataStructure.cpp \
+  $$PWD/code/VertexTriangleAdjacency.cpp \
+  $$PWD/code/XFileImporter.cpp \
+  $$PWD/code/XFileParser.cpp \
+  $$PWD/code/XGLLoader.cpp
+
+HEADERS += \
+    $$PWD/code/3DSHelper.h \
+    $$PWD/code/3DSLoader.h \
+    $$PWD/code/ACLoader.h \
+    $$PWD/code/ASELoader.h \
+    $$PWD/code/ASEParser.h \
+    $$PWD/code/assbin_chunks.h \
+    $$PWD/code/AssimpPCH.h \
+    $$PWD/code/B3DImporter.h \
+    $$PWD/code/BaseImporter.h \
+    $$PWD/code/BaseProcess.h \
+    $$PWD/code/Bitmap.h \
+    $$PWD/code/BlenderBMesh.h \
+    $$PWD/code/BlenderDNA.h \
+    $$PWD/code/BlenderIntermediate.h \
+    $$PWD/code/BlenderLoader.h \
+    $$PWD/code/BlenderModifier.h \
+    $$PWD/code/BlenderScene.h \
+    $$PWD/code/BlenderSceneGen.h \
+    $$PWD/code/BlenderTessellator.h \
+    $$PWD/code/BlobIOSystem.h \
+    $$PWD/code/BVHLoader.h \
+    $$PWD/code/ByteSwap.h \
+    $$PWD/code/CalcTangentsProcess.h \
+    $$PWD/code/CInterfaceIOWrapper.h \
+    $$PWD/code/COBLoader.h \
+    $$PWD/code/COBScene.h \
+    $$PWD/code/ColladaExporter.h \
+    $$PWD/code/ColladaHelper.h \
+    $$PWD/code/ColladaLoader.h \
+    $$PWD/code/ColladaParser.h \
+    $$PWD/code/ComputeUVMappingProcess.h \
+    $$PWD/code/ConvertToLHProcess.h \
+    $$PWD/code/CSMLoader.h \
+    $$PWD/code/DeboneProcess.h \
+    $$PWD/code/DefaultIOStream.h \
+    $$PWD/code/DefaultIOSystem.h \
+    $$PWD/code/DefaultProgressHandler.h \
+    $$PWD/code/DXFHelper.h \
+    $$PWD/code/DXFLoader.h \
+    $$PWD/code/Exceptional.h \
+    $$PWD/code/fast_atof.h \
+    $$PWD/code/FBXCompileConfig.h \
+    $$PWD/code/FBXConverter.h \
+    $$PWD/code/FBXDocument.h \
+    $$PWD/code/FBXDocumentUtil.h \
+    $$PWD/code/FBXImporter.h \
+    $$PWD/code/FBXImportSettings.h \
+    $$PWD/code/FBXParser.h \
+    $$PWD/code/FBXProperties.h \
+    $$PWD/code/FBXTokenizer.h \
+    $$PWD/code/FBXUtil.h \
+    $$PWD/code/FileLogStream.h \
+    $$PWD/code/FileSystemFilter.h \
+    $$PWD/code/FindDegenerates.h \
+    $$PWD/code/FindInstancesProcess.h \
+    $$PWD/code/FindInvalidDataProcess.h \
+    $$PWD/code/FixNormalsStep.h \
+    $$PWD/code/GenericProperty.h \
+    $$PWD/code/GenFaceNormalsProcess.h \
+    $$PWD/code/GenVertexNormalsProcess.h \
+    $$PWD/code/HalfLifeFileData.h \
+    $$PWD/code/Hash.h \
+    $$PWD/code/HMPFileData.h \
+    $$PWD/code/HMPLoader.h \
+    $$PWD/code/IFCLoader.h \
+    $$PWD/code/IFCReaderGen.h \
+    $$PWD/code/IFCUtil.h \
+    $$PWD/code/IFF.h \
+    $$PWD/code/Importer.h \
+    $$PWD/code/ImproveCacheLocality.h \
+    $$PWD/code/IRRLoader.h \
+    $$PWD/code/IRRMeshLoader.h \
+    $$PWD/code/IRRShared.h \
+    $$PWD/code/irrXMLWrapper.h \
+    $$PWD/code/JoinVerticesProcess.h \
+    $$PWD/code/LimitBoneWeightsProcess.h \
+    $$PWD/code/LineSplitter.h \
+    $$PWD/code/LogAux.h \
+    $$PWD/code/LWOAnimation.h \
+    $$PWD/code/LWOFileData.h \
+    $$PWD/code/LWOLoader.h \
+    $$PWD/code/LWSLoader.h \
+    $$PWD/code/MakeVerboseFormat.h \
+    $$PWD/code/MaterialSystem.h \
+    $$PWD/code/MD2FileData.h \
+    $$PWD/code/MD2Loader.h \
+    $$PWD/code/MD2NormalTable.h \
+    $$PWD/code/MD3FileData.h \
+    $$PWD/code/MD3Loader.h \
+    $$PWD/code/MD4FileData.h \
+    $$PWD/code/MD5Loader.h \
+    $$PWD/code/MD5Parser.h \
+    $$PWD/code/MDCFileData.h \
+    $$PWD/code/MDCLoader.h \
+    $$PWD/code/MDCNormalTable.h \
+    $$PWD/code/MDLDefaultColorMap.h \
+    $$PWD/code/MDLFileData.h \
+    $$PWD/code/MDLLoader.h \
+    $$PWD/code/MemoryIOWrapper.h \
+    $$PWD/code/MS3DLoader.h \
+    $$PWD/code/NDOLoader.h \
+    $$PWD/code/NFFLoader.h \
+    $$PWD/code/ObjExporter.h \
+    $$PWD/code/ObjFileData.h \
+    $$PWD/code/ObjFileImporter.h \
+    $$PWD/code/ObjFileMtlImporter.h \
+    $$PWD/code/ObjFileParser.h \
+    $$PWD/code/ObjTools.h \
+    $$PWD/code/OFFLoader.h \
+    $$PWD/code/OgreBinarySerializer.h \
+    $$PWD/code/OgreImporter.h \
+    $$PWD/code/OgreParsingUtils.h \
+    $$PWD/code/OgreStructs.h \
+    $$PWD/code/OgreXmlSerializer.h \
+    $$PWD/code/OptimizeGraph.h \
+    $$PWD/code/OptimizeMeshes.h \
+    $$PWD/code/ParsingUtils.h \
+    $$PWD/code/PlyExporter.h \
+    $$PWD/code/PlyLoader.h \
+    $$PWD/code/PlyParser.h \
+    $$PWD/code/PolyTools.h \
+    $$PWD/code/PretransformVertices.h \
+    $$PWD/code/ProcessHelper.h \
+    $$PWD/code/Profiler.h \
+    $$PWD/code/Q3BSPFileData.h \
+    $$PWD/code/Q3BSPFileImporter.h \
+    $$PWD/code/Q3BSPFileParser.h \
+    $$PWD/code/Q3BSPZipArchive.h \
+    $$PWD/code/Q3DLoader.h \
+    $$PWD/code/qnan.h \
+    $$PWD/code/RawLoader.h \
+    $$PWD/code/RemoveComments.h \
+    $$PWD/code/RemoveRedundantMaterials.h \
+    $$PWD/code/RemoveVCProcess.h \
+    $$PWD/code/SceneCombiner.h \
+    $$PWD/code/ScenePreprocessor.h \
+    $$PWD/code/ScenePrivate.h \
+    $$PWD/code/SGSpatialSort.h \
+    $$PWD/code/SkeletonMeshBuilder.h \
+    $$PWD/code/SMDLoader.h \
+    $$PWD/code/SmoothingGroups.h \
+    $$PWD/code/SortByPTypeProcess.h \
+    $$PWD/code/SpatialSort.h \
+    $$PWD/code/SplitByBoneCountProcess.h \
+    $$PWD/code/SplitLargeMeshes.h \
+    $$PWD/code/StandardShapes.h \
+    $$PWD/code/StdOStreamLogStream.h \
+    $$PWD/code/STEPFile.h \
+    $$PWD/code/STEPFileEncoding.h \
+    $$PWD/code/STEPFileReader.h \
+    $$PWD/code/STLExporter.h \
+    $$PWD/code/STLLoader.h \
+    $$PWD/code/StreamReader.h \
+    $$PWD/code/StringComparison.h \
+    $$PWD/code/Subdivision.h \
+    $$PWD/code/TargetAnimation.h \
+    $$PWD/code/TerragenLoader.h \
+    $$PWD/code/TextureTransform.h \
+    $$PWD/code/TinyFormatter.h \
+    $$PWD/code/TriangulateProcess.h \
+    $$PWD/code/UnrealLoader.h \
+    $$PWD/code/ValidateDataStructure.h \
+    $$PWD/code/Vertex.h \
+    $$PWD/code/VertexTriangleAdjacency.h \
+    $$PWD/code/Win32DebugLogStream.h \
+    $$PWD/code/XFileHelper.h \
+    $$PWD/code/XFileImporter.h \
+    $$PWD/code/XFileParser.h \
+    $$PWD/code/XGLLoader.h \
+    $$PWD/assimp/ai_assert.h \
+    $$PWD/assimp/anim.h \
+    $$PWD/assimp/camera.h \
+    $$PWD/assimp/cexport.h \
+    $$PWD/assimp/cfileio.h \
+    $$PWD/assimp/cimport.h \
+    $$PWD/assimp/color4.h \
+    $$PWD/assimp/config.h \
+    $$PWD/assimp/DefaultLogger.hpp \
+    $$PWD/assimp/defs.h \
+    $$PWD/assimp/Exporter.hpp \
+    $$PWD/assimp/Importer.hpp \
+    $$PWD/assimp/importerdesc.h \
+    $$PWD/assimp/IOStream.hpp \
+    $$PWD/assimp/IOSystem.hpp \
+    $$PWD/assimp/light.h \
+    $$PWD/assimp/Logger.hpp \
+    $$PWD/assimp/LogStream.hpp \
+    $$PWD/assimp/material.h \
+    $$PWD/assimp/matrix3x3.h \
+    $$PWD/assimp/matrix4x4.h \
+    $$PWD/assimp/mesh.h \
+    $$PWD/assimp/metadata.h \
+    $$PWD/assimp/NullLogger.hpp \
+    $$PWD/assimp/postprocess.h \
+    $$PWD/assimp/ProgressHandler.hpp \
+    $$PWD/assimp/quaternion.h \
+    $$PWD/assimp/scene.h \
+    $$PWD/assimp/texture.h \
+    $$PWD/assimp/types.h \
+    $$PWD/assimp/vector2.h \
+    $$PWD/assimp/vector3.h \
+    $$PWD/assimp/version.h
