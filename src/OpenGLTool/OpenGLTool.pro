@@ -72,7 +72,8 @@ HEADERS += \
     OpenGLTool/OpenGLAPIPrivate/TextureRender.hpp \
     GLEWGL/glew.h \
     OpenGLTool/OpenGLAPIPrivate/GLUnamedObject.hpp \
-    OpenGLTool/OpenGLAPIPrivate/GLUnamedObject.hxx
+    OpenGLTool/OpenGLAPIPrivate/GLUnamedObject.hxx \
+    OpenGLTool/OpenGLAPIPrivate/PrivateComputeSourceLoader.hpp
 
 SOURCES += \
     glew.c \

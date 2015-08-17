@@ -209,8 +209,8 @@ static inline Program VFProgamLoad(
         const QString & v_name,
         const QString & f_name
         ){
-    const auto v = v_name.toLocal8Bit().toStdString();
-    const auto f = f_name.toLocal8Bit().toStdString();
+    const auto v = std::move( v_name.toLocal8Bit().toStdString() );
+    const auto f = std::move( f_name.toLocal8Bit().toStdString() );
     return VFProgamLoad(v,f);
 }
 
@@ -219,8 +219,8 @@ static inline Program VFProgramLoadSources (
         const QString & fFile
         ){
     std::string vf ,ff;
-    vf = vFile.toUtf8().toStdString();
-    ff = fFile.toUtf8().toStdString();
+    vf = std::move( vFile.toUtf8().toStdString() );
+    ff = std::move( fFile.toUtf8().toStdString() );
     return VFProgramLoadSources(vf,ff);
 }
 

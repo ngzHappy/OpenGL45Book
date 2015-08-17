@@ -50,6 +50,7 @@ easy use function
 易用API接口
 */
 #include "PrivateVFSourceLoader.hpp"
+#include "PrivateComputeSourceLoader.hpp"
 
 #endif
 
