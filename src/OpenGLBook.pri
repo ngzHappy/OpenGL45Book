@@ -100,6 +100,9 @@ APPRotateNormalSphere.depends+=SLIBOpenGLTool
 APPSpider.file= $$PWD/Spider/Spider.pro
 APPSpider.depends+=SLIBOpenGLTool
 
+APPModelView.file= $$PWD/ModelView/ModelView.pro
+APPModelView.depends+=SLIBOpenGLTool
+
 SUBDIRS += APPVoidTest
 SUBDIRS += LIBAssimp
 SUBDIRS += SLIBOpenGLTool
@@ -133,7 +136,7 @@ SUBDIRS += APPSimpleMultiSampleFBO
 SUBDIRS += APPNormalSphere
 SUBDIRS += APPRotateNormalSphere
 SUBDIRS += APPSpider
-
+SUBDIRS += APPModelView
 
 
 

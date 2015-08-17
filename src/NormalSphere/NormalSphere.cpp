@@ -8,6 +8,8 @@
 #include <OpenGLTool/ModelLoader.hpp>
 #include <OpenGLTool/ModelLoaderCallbacks.hpp>
 #include <QDebug>
+#include <algorithm>
+#include <utility>
 #ifdef QT_DEBUG
 #ifndef _DEBUG_OPENGL_QT_
 #define _DEBUG_OPENGL_QT_
@@ -87,10 +89,16 @@ callBack.triangles.size()*sizeof(callBack.triangles[0]),
 callBack.pointNormal.size()*sizeof(callBack.pointNormal[0]),
 &callBack.pointNormal[0]);
 
+	const double scale__ = (std::max)({ 
+		double(callBack.xMax) - callBack.xMin ,
+		double(callBack.yMax) - callBack.yMin,
+		double(callBack.zMax) - callBack.zMin
+	});
+
 	modelScale = glm::scale(glm::vec3(
-		float( 1.50 / (callBack.xMax-callBack.xMin) ),
-		float( 1.50 / (callBack.yMax-callBack.yMin)),
-		float(-1.50 / (callBack.zMax-callBack.zMin))
+		float( 1.50 / scale__),
+		float( 1.50 / scale__),
+		float(-1.50 / scale__)
 		));
 	indexCount = 3 * callBack.triangles.size() ;
 }
