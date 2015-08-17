@@ -121,7 +121,7 @@ QGLDebugTool::test();
 		IPNTSize[i.first] = ipnt.size() * 3;
 
 	}
-
+}
 	{
 		const static QString vs = R"(#version 450
 layout(location=0) in vec3 ip_;
@@ -146,7 +146,7 @@ fcolor = texture(texture_1_,tuv);
 		program = gl::VFProgramLoadSources(vs,fs);
 	}
 
-}
+
 {
 	typedef void(QTimer::* TT)();
 	timer.connect(&timer,TT(&QTimer::timeout),

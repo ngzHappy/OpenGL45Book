@@ -1,7 +1,8 @@
 ﻿/*utf8 with bom*/
-#include "ModelView.hpp"
+
 #include <OpenGLTool/QGLApplication.hpp>
 #include <QTextCodec>
+#include "MainWindow.hpp"
 
 int main(int argc,char ** argv  ){
     QApplication app(argc,argv);
@@ -9,7 +10,7 @@ int main(int argc,char ** argv  ){
 
     QTextCodec::setCodecForLocale( QTextCodec::codecForName(LOCAL_CODEC_NAME) );
 
-    ModelView widget;
+	MainWindow widget;
     widget.setWindowTitle("ModelView");
 	widget.show();
 

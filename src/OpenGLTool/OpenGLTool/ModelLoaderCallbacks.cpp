@@ -1757,8 +1757,16 @@ assert((thisp->current_texture == -1));
 	
 #endif
 	//if (ss == 0) { ss = new std::ofstream("xxx.txt"); }
-	thisp->current_texture = textureIndex;
-	assert(textureIndex >= 0);
+	if (textureIndex>=0) {
+		thisp->current_texture = textureIndex;
+	}
+	else {
+#ifndef NDEBUG
+		qDebug() << __LINE__ << __func__ << __FILE__;
+#endif
+	return;
+	}
+	
 	auto & vnt = *(thisp->current_face_points[i]);
 	vnt.values[6] = u;
 	vnt.values[7] = v;

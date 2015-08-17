@@ -13,6 +13,15 @@ SLIBOpenGLTool.depends += LIBAssimp
 APPProjectModel.file = $$PWD/ProjectModel/ProjectModel.pro
 APPProjectModel.depends += SLIBOpenGLTool
 
+APPProjectModelFlipTextureY.file = $$PWD/ProjectModelFlipTextureY/ProjectModelFlipTextureY.pro
+APPProjectModelFlipTextureY.depends += SLIBOpenGLTool
+
+APPProjectModelFlipZ.file = $$PWD/ProjectModelFlipZ/ProjectModelFlipZ.pro
+APPProjectModelFlipZ.depends += SLIBOpenGLTool
+
+APPProjectModelFlipZTextureY.file = $$PWD/ProjectModelFlipZTextureY/ProjectModelFlipZTextureY.pro
+APPProjectModelFlipZTextureY.depends += SLIBOpenGLTool
+
 APPTemplateApplicaton.file = $$PWD/TemplateApplicaton/TemplateApplicaton.pro
 APPTemplateApplicaton.depends += SLIBOpenGLTool
 
@@ -107,6 +116,9 @@ SUBDIRS += APPVoidTest
 SUBDIRS += LIBAssimp
 SUBDIRS += SLIBOpenGLTool
 SUBDIRS += APPProjectModel
+SUBDIRS += APPProjectModelFlipZTextureY
+SUBDIRS += APPProjectModelFlipZ
+SUBDIRS += APPProjectModelFlipTextureY
 SUBDIRS += APPTemplateApplicaton
 SUBDIRS += APPSimpleBuffer
 SUBDIRS += APPSimpleClear

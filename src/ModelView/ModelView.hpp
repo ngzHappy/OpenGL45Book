@@ -18,6 +18,8 @@ protected:
 virtual void paintGL() override;
 virtual void initializeGL() override;
 virtual void resizeGL(int w, int h)override;
+public slots:
+void loadModel(const QString &);
 };
 
 #endif

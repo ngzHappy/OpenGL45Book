@@ -2,30 +2,16 @@
 include($$PWD/../configure.pri.user)
 include($$PWD/../cplusplus.pri)
 
-
 TEMPLATE = app
 
 QT+=core
-QT+=widgets
-QT+=gui
-QT+=opengl
-
-SOURCES+= \
-    main.cpp \
-    ModelView.cpp \
-    MainWindow.cpp
-HEADERS+= \
-    ModelView.hpp \
-    MainWindow.hpp
-
-
-
-INCLUDEPATH+=$$PWD/../OpenGLTool
-
 
 win32-msvc*:{
 CONFIG *= console
 }
+
+TARGET = projectModelFZFY
+INCLUDEPATH+=$$PWD/../OpenGLTool
 
 CONFIG(debug,debug|release){
 DESTDIR = $$OUT__DIR__BASE__/bind
@@ -37,9 +23,10 @@ LIBS += -L$$OUT__DIR__BASE__/bin -lQLOpenGLTool
 LIBS += -L$$OUT__DIR__BASE__/bin -lQLAssimp
 }
 
-
-
 include($$PWD/../openglBaseLibs.pri)
+
+SOURCES += \
+    projectModel.cpp
 
 
 
