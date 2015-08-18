@@ -49,6 +49,21 @@ public:
         glBindFramebuffer(GL_FRAMEBUFFER, (GLuint)obj);
     }
 
+	static inline void bindShaderStorageBuffer(
+		GLuint index,
+		const gl::Buffer & buffer
+		) {
+		//GL_ATOMIC_COUNTER_BUFFER
+		//GL_TRANSFORM_FEEDBACK_BUFFER
+		//GL_UNIFORM_BUFFER
+		//GL_SHADER_STORAGE_BUFFER. 
+		//void glBindBufferBase(
+		//	GLenum target,
+		//	GLuint index,
+		//	GLuint buffer);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER,index, GLuint(buffer));
+	}
+
 };
 
 }

@@ -21,6 +21,7 @@
 #include "OpenGLAPIPrivate/QGLDebugTool.hpp"
 #include "OpenGLAPIPrivate/TextureRender.hpp"
 #include "OpenGLAPIPrivate/MultiSampleTextureRender.hpp"
+#include "OpenGLAPIPrivate/DispatchCompute.hpp"
 
 namespace gl {
 

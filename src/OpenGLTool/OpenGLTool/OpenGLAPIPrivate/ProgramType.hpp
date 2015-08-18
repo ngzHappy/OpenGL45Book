@@ -3,6 +3,7 @@
 #define __PROGRAMTYPE____OPENGL__API__PRIVATE__0x00
 
 #include "GLUnamedObject.hxx"
+#include <array>
 
 namespace gl {
 
@@ -333,6 +334,16 @@ public:
 		glProgramUniformMatrix4x3fv(program_, location, count, transpose, value);
 	}
 
+/* compute only  */
+	std::array<GLint,3> computeWorkGroupSize() {
+		std::array<GLint, 3> ans;
+		glGetProgramiv(
+			program_, 
+			GL_COMPUTE_WORK_GROUP_SIZE, 
+			(GLint*)(&ans)
+			);
+		return ans;
+	}
 };
 
 }

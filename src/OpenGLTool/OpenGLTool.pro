@@ -73,7 +73,8 @@ HEADERS += \
     GLEWGL/glew.h \
     OpenGLTool/OpenGLAPIPrivate/GLUnamedObject.hpp \
     OpenGLTool/OpenGLAPIPrivate/GLUnamedObject.hxx \
-    OpenGLTool/OpenGLAPIPrivate/PrivateComputeSourceLoader.hpp
+    OpenGLTool/OpenGLAPIPrivate/PrivateComputeSourceLoader.hpp \
+    OpenGLTool/OpenGLAPIPrivate/DispatchCompute.hpp
 
 SOURCES += \
     glew.c \

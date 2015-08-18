@@ -24,6 +24,25 @@ static inline void createBuffers(
 }
 
 /*
+
+*/
+static inline void createBuffers(
+	NamedBuffer * buffer, GLsizei size
+	) {
+	glCreateBuffers(1, (GLuint *)buffer);
+	//GLuint buffer, GLsizei size, const void * data, GLbitfield flags
+	//GL_DYNAMIC_STORAGE_BIT 
+	//GL_MAP_READ_BIT 
+	//GL_MAP_WRITE_BIT 
+	//GL_MAP_PERSISTENT_BIT 
+	//GL_MAP_COHERENT_BIT 
+	//GL_CLIENT_STORAGE_BIT 
+	glNamedBufferStorage(
+		(GLuint  )(*buffer), size,
+		0, GL_DYNAMIC_STORAGE_BIT);
+}
+
+/*
 void glDeleteBuffers(	GLsizei n,const GLuint * buffers);
 */
 inline void deleteBuffers( SizeInteger n,const Buffer * buffers ){

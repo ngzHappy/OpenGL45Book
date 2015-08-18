@@ -51,10 +51,29 @@ public:
 	explicit operator bool()const{ return value_ != 0; }
     NamedBuffer(){}
     explicit NamedBuffer(const UnsignedInteger v):Buffer(v){}
+
+	enum class Access : GLenum {
+		READ_ONLY = GL_READ_ONLY,
+		WRITE_ONLY = GL_WRITE_ONLY,
+		READ_WRITE = GL_READ_WRITE,
+	};
+	void * map(Access access = Access::READ_ONLY) {
+		return glMapNamedBuffer(value_, GLenum(access));
+	}
+	void unmap() {
+		glUnmapNamedBuffer(value_);
+	}
+	template<typename T >
+	T * map(Access access = Access::READ_ONLY) {
+		return (T*)(glMapNamedBuffer(value_, GLenum(access)));
+	}
 };
 
-}
 
+
+}//gl
+
+ 
 
 
 #endif

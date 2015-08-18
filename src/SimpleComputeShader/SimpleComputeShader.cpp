@@ -18,19 +18,56 @@ public:
 }
 /****************************************************/
 /****************************************************/
-    ~ThisPrivate(){}
+	gl::Program program;
+	gl::NamedBuffer dataBuffer;
+    ~ThisPrivate(){
+		gl::deleteAny(program,dataBuffer);
+	}
     void initializeGL(){
 
-        glClearDepth(1);
-        glClearColor(0,0,0,0);
     #ifdef _DEBUG_OPENGL_QT_
-            QGLDebugTool::setSimpleCallbackFunction();
-            QGLDebugTool::test();
+QGLDebugTool::setSimpleCallbackFunction();
+QGLDebugTool::test();
     #endif
+constexpr const static char cs[] = R"(#version 450
+layout (
+local_size_x = 3, 
+local_size_y = 1) in;
+layout (binding = 0, std430) coherent buffer SOME_NAME{
+float data[3];
+};
+
+void main(){
+data[gl_LocalInvocationIndex ] =(gl_LocalInvocationIndex +1)/4.0 ;
+}
+)";
+program = gl::CProgramLoadSources(cs);
+gl::createBuffers(1,&dataBuffer);
+gl::bufferData(
+	dataBuffer, 
+	sizeof(float) * 3, 0,
+	gl::BufferDataUsage::DYNAMIC_DRAW);
 
  }
     void paintGL(){
-        //write your code here
+		float clearColor[]{0,0,0,1};
+		gl::NamedFrameBufferObject root;
+		{
+			using namespace gl::DisPatchCompute;
+			Pack pack;
+			pack.useProgram(program);
+			pack.bindShaderStorageBuffer(0, dataBuffer);
+			gl::disPatch(pack);
+		}
+		 
+		auto * data_ = dataBuffer.map<float>();
+		clearColor[0] = data_[0];
+		clearColor[1] = data_[1];
+		clearColor[2] = data_[2];
+		dataBuffer.unmap();
+
+		root.clearColor(clearColor);
+
     }
 /****************************************************/
 /****************************************************/

@@ -19,7 +19,18 @@
 
 
 namespace gl {
-
+	/*
+	Work group dimensions
+	in uvec3 gl_NumWorkGroups;
+	const uvec3 gl_WorkGroupSize;
+	in uvec3 gl_LocalGroupSize;
+	Work group and invocation IDs
+	in uvec3 gl_WorkGroupID;
+	in uvec3 gl_LocalInvocationID;
+	Derived variables
+	in uvec3 gl_GlobalInvocationID;
+	in uint gl_LocalInvocationIndex;
+	*/
 static inline Program CProgramLoadSources (
         const std::string & cFile
         ){
@@ -76,14 +87,14 @@ static inline Program CProgramLoadSources (
                 data[0] = 0;
             }
             ~ShaderFree() {
-                glDeleteShader(data[1]);
+                glDeleteShader(data[0]);
             }
         }shaders;
 
         GLuint * shader = &(shaders.data[0]);
 
         {//1
-            shader[0] = glCreateShader(GL_VERTEX_SHADER);
+            shader[0] = glCreateShader(GL_COMPUTE_SHADER);
             if (0 == (shader[0])) {
                 printError("GL_VERTEX_SHADER not surported!");
                 return Program();
@@ -167,6 +178,13 @@ static inline Program CProgamLoad(
 
 
     return CProgramLoadSources(cFile );
+}
+
+static inline Program CProgamLoad(const char * c_fileName) {
+	return  CProgamLoad(std::string(c_fileName));
+}
+static inline Program CProgramLoadSources(const char * cFile) {
+	return CProgramLoadSources(std::string(cFile));
 }
 
 #ifdef QT_CORE_LIB
