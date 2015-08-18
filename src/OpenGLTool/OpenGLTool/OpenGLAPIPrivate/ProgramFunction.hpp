@@ -51,6 +51,7 @@ easy use function
 */
 #include "PrivateVFSourceLoader.hpp"
 #include "PrivateComputeSourceLoader.hpp"
+#include "PrivateTCTES.hpp"
 
 #endif
 
