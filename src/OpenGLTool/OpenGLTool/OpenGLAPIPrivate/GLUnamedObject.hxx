@@ -64,6 +64,63 @@ public:
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER,index, GLuint(buffer));
 	}
 
+/*
+format::
+GL_RGBA32F
+GL_RGBA16F
+GL_RG32F
+GL_RG16F
+GL_R11F_G11F_B10F
+GL_R32F
+GL_R16F
+GL_RGBA32UI
+GL_RGBA16UI
+GL_RGB10_A2UI
+GL_RGBA8UI
+GL_RG32UI
+GL_RG16UI
+GL_RG8UI
+GL_R32UI
+GL_R16UI
+GL_R8UI
+GL_RGBA32I
+GL_RGBA16I
+GL_RGBA8I
+GL_RG32I
+GL_RG16I
+GL_RG8I
+GL_R32I
+GL_R16I
+GL_R8I
+GL_RGBA16
+GL_RGB10_A2
+GL_RGBA8
+GL_RG16
+GL_RG8
+GL_R16
+GL_R8
+GL_RGBA16_SNORM
+GL_RGBA8_SNORM
+GL_RG16_SNORM
+GL_RG8_SNORM
+GL_R16_SNORM
+GL_R8_SNORM
+*/
+	static inline void bindImageTexture(
+		GLuint binding_,
+		NamedTexture texture,
+		GLenum access= GL_READ_WRITE,
+		GLenum format = GL_R32F,
+		GLint level = 0,
+		GLboolean layered = false,
+		GLint layer =0
+		) {
+		glBindImageTexture(
+			binding_,(GLuint)texture,
+			level,layered,layer,
+			access,format);
+	}
+
 };
 
 }

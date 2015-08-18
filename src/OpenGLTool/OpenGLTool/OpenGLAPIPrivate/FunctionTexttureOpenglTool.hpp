@@ -156,6 +156,133 @@ static inline void bindTexture(
         return NamedTexture(texture);
     }
 
+    /*
+internalformat::
+GL_R8
+GL_R8_SNORM
+GL_R16
+GL_R16_SNORM
+GL_RG8
+GL_RG8_SNORM
+GL_RG16
+GL_RG16_SNORM
+GL_R3_G3_B2
+GL_RGB4
+GL_RGB5
+GL_RGB8
+GL_RGB8_SNORM
+GL_RGB10
+GL_RGB12
+GL_RGB16_SNORM
+GL_RGBA2
+GL_RGBA4
+GL_RGB5_A1
+GL_RGBA8
+GL_RGBA8_SNORM
+GL_RGB10_A2
+GL_RGB10_A2UI
+GL_RGBA12
+GL_RGBA16
+GL_SRGB8
+GL_SRGB8_ALPHA8
+GL_R16F
+GL_RG16F
+GL_RGB16F
+GL_RGBA16F
+GL_R32F
+GL_RG32F
+GL_RGB32F
+GL_RGBA32F
+GL_R11F_G11F_B10F
+GL_RGB9_E5
+GL_R8I
+GL_R8UI
+GL_R16I
+GL_R16UI
+GL_R32I
+GL_R32UI
+GL_RG8I
+GL_RG8UI
+GL_RG16I
+GL_RG16UI
+GL_RG32I
+GL_RG32UI
+GL_RGB8I
+GL_RGB8UI
+GL_RGB16I
+GL_RGB16UI
+GL_RGB32I
+GL_RGB32UI
+GL_RGBA8I
+GL_RGBA8UI
+GL_RGBA16I
+GL_RGBA16UI
+GL_RGBA32I
+GL_RGBA32UI
+format::
+GL_RED,
+GL_RG,
+GL_RGB,
+GL_BGR,
+GL_RGBA,
+GL_BGRA,
+GL_DEPTH_COMPONENT,
+GL_STENCIL_INDEX.
+type::
+ GL_UNSIGNED_BYTE,
+GL_BYTE,
+GL_UNSIGNED_SHORT,
+GL_SHORT,
+GL_UNSIGNED_INT,
+GL_INT,
+GL_FLOAT,
+GL_UNSIGNED_BYTE_3_3_2,
+GL_UNSIGNED_BYTE_2_3_3_REV,
+GL_UNSIGNED_SHORT_5_6_5,
+GL_UNSIGNED_SHORT_5_6_5_REV,
+GL_UNSIGNED_SHORT_4_4_4_4,
+GL_UNSIGNED_SHORT_4_4_4_4_REV,
+GL_UNSIGNED_SHORT_5_5_5_1,
+GL_UNSIGNED_SHORT_1_5_5_5_REV,
+GL_UNSIGNED_INT_8_8_8_8,
+GL_UNSIGNED_INT_8_8_8_8_REV,
+GL_UNSIGNED_INT_10_10_10_2, and
+GL_UNSIGNED_INT_2_10_10_10_REV.
+
+*/
+    static inline NamedTexture createTexture2D (
+            int width,int height, 
+		    const void * data = 0,
+            GLenum internalformat = GL_R32F,
+            GLenum format = GL_RED,
+            GLenum type =   GL_FLOAT,
+		    GLenum tar = GL_TEXTURE_RECTANGLE
+            ){
+        NamedTexture ans;
+        if(width<=0){return ans;}
+        if(height<=0){return ans;}
+        GLuint texture = 0;
+        glCreateTextures(tar,1, &texture);
+        if (0 == texture){ return ans; }
+        glTextureStorage2D(
+            texture, 1, internalformat, width,  height
+             );
+        glTextureParameteri(texture, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        //glTextureParameteri(texture, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // Linear Min Filter
+        //glTextureParameteri(texture, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Linear Mag Filter
+        if(data){
+        glTextureSubImage2D(
+            texture,0,
+            0, 0,  width ,  height ,
+            format, type, data
+            );
+}
+        return NamedTexture(texture);
+
+    }
+
+
 	static inline Texture genTexture2D(
 		const QString & fileName,
 		GLenum tar = GL_TEXTURE_2D
