@@ -79,7 +79,9 @@ HEADERS += \
     OpenGLTool/OpenGLAPIPrivate/PrivateTES.hpp \
     OpenGLTool/OpenGLAPIPrivate/PrivateTCTEGS.hpp \
     OpenGLTool/OpenGLAPIPrivate/PrivateTEGS.hpp \
-    OpenGLTool/OpenGLAPIPrivate/PrivateVGFSourceLoader.hpp
+    OpenGLTool/OpenGLAPIPrivate/PrivateVGFSourceLoader.hpp \
+    OpenGLTool/OpenGLAPIPrivate/SamplerObject.hpp \
+    OpenGLTool/OpenGLAPIPrivate/SamplerObjectFunction.hpp
 
 SOURCES += \
     glew.c \

@@ -137,6 +137,10 @@ gsampler2DMSArray​ 	GL_TEXTURE_2D_MULTISAMPLE_ARRAY 	Multisample Array Texture
 				glBindTexture(target, texture_);
 			}
 
+			void bind(GLuint i) const{
+				glBindTextureUnit(i, texture_);
+			}
+
     };
 
 

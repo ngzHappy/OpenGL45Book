@@ -77,7 +77,7 @@ void main(void){
         if(texture){
             auto locker = program.use(QGLApplication::atomicFunction());
             program.bindVertexArray(vao);
-            program.bindTexture(texture, 0 ,GL_TEXTURE_RECTANGLE );
+            program.bindTexture( 0 ,texture );
             gl::drawArrays(gl::DrawArraysMode::TRIANGLE_STRIP,0,4);
             (void) locker;
         }

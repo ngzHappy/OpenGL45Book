@@ -22,6 +22,8 @@
 #include "OpenGLAPIPrivate/TextureRender.hpp"
 #include "OpenGLAPIPrivate/MultiSampleTextureRender.hpp"
 #include "OpenGLAPIPrivate/DispatchCompute.hpp"
+#include "OpenGLAPIPrivate/SamplerObject.hpp"
+#include "OpenGLAPIPrivate/SamplerObjectFunction.hpp"
 
 namespace gl {
 
@@ -59,6 +61,13 @@ inline void deleteAny(const NamedFrameBufferObject & v){
 inline void deleteAny(const FrameBufferObject & v){
     deleteFramebuffers(1,&v);
 }
+inline void deleteAny(const SamplerObject & v){
+    deleteSamplers(1,&v);
+}
+inline void deleteAny(const NamedSamplerObject & v){
+    deleteSamplers(1,&v);
+}
+
 template<typename T0 , typename ... Args>
 inline void deleteAny( const T0 & a0,  const Args &...args) {
 	deleteAny(a0);

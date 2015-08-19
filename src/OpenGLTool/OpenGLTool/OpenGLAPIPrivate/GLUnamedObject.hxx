@@ -6,7 +6,8 @@
 #include "VertexArrayType.hpp"
 #include "TexttureOpenglTool.hpp"
 #include "FBOTypeGL.hpp"
-#include "array"
+#include <array>
+#include <memory>
 
 namespace gl {
 
@@ -38,10 +39,17 @@ public:
     static inline void bindTexture(
         const NamedTexture & v,
         GLuint location /* 0 1 2 3 4 5 ...*/,
-        GLenum target = GL_TEXTURE_RECTANGLE
+        GLenum target 
         ) {
         v.bind(location,target);
     }
+
+	static inline void bindTexture(
+		GLuint location /* 0 1 2 3 4 5 ...*/,
+		const NamedTexture & v
+		) {
+		v.bind( location );
+	}
 
     static inline void bindFrameBuffer() {
             glBindFramebuffer(GL_FRAMEBUFFER,0);
