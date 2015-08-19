@@ -21,7 +21,8 @@ namespace gl {
 		const std::string & fFile
 		) {
 
-		if ( fFile.empty() || vFile.empty()|| teFile.empty() ) { return Program(); }
+		if ( gFile.empty()|| \
+			fFile.empty() || vFile.empty()|| teFile.empty() ) { return Program(); }
 
 		{//0
 			auto printProgramInfo = [](GLuint e) {

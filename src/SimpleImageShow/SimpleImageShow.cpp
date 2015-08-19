@@ -27,13 +27,13 @@ public:
     #endif
         initializeGL();
 }
+/*********************************************/
     gl::NamedTexture texture ;
     gl::Program program ;
     gl::NamedVertexArrayObject vao;
 
     ~ThisPrivate(){
         gl::deleteAny(texture,vao,program);
-
     }
     void initializeGL(){
         gl::createVertexArrays(1,&vao);
@@ -83,6 +83,7 @@ void main(void){
         }
 
     }
+/*********************************************/
     void resizeGL(int w,int h){
         glViewport(0,0,w,h);
     }

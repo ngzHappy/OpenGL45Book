@@ -6,6 +6,7 @@
 #include "VertexArrayType.hpp"
 #include "TexttureOpenglTool.hpp"
 #include "FBOTypeGL.hpp"
+#include "SamplerObject.hpp"
 #include <array>
 #include <memory>
 
@@ -129,6 +130,11 @@ GL_R8_SNORM
 			level,layered,layer,
 			access,format);
 	}
+
+	void bindSampler(GLuint location, const NamedSamplerObject & nso_) {
+		nso_.bind(location);
+	}
+
 /*
 细分着色器
 */
