@@ -48,18 +48,7 @@ class NamedSamplerObject : public SamplerObject {
     }
     NamedSamplerObject(SamplerObject && v):SamplerObject(std::move(v)){
     }
-	//GL_TEXTURE_WRAP_S,
-	//GL_TEXTURE_WRAP_T, 
-	//GL_TEXTURE_WRAP_R,
-	//GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MAG_FILTER, 
-	//GL_TEXTURE_BORDER_COLOR, 
-	//GL_TEXTURE_MIN_LOD, 
-	//GL_TEXTURE_MAX_LOD, 
-	//GL_TEXTURE_LOD_BIAS 
-	//GL_TEXTURE_COMPARE_MODE, 
-	//GL_TEXTURE_COMPARE_FUNC.
-
-
+ 
 public:
 
     explicit operator const UnsignedInteger&()const{ return value_; }
@@ -87,7 +76,55 @@ public:
 		glSamplerParameteri(sampler_, GL_TEXTURE_MAG_FILTER, GLenum(type));
 	}
 
-	
+	void setMinLod(GLint i=-1000){
+		glSamplerParameteri(sampler_, GL_TEXTURE_MIN_LOD, i);
+	}
+	void setMaxLod(GLint i= 1000) {
+		glSamplerParameteri(sampler_, GL_TEXTURE_MAX_LOD, i);
+	}
+
+	enum class WrapType : GLenum {
+		CLAMP_TO_EDGE=GL_CLAMP_TO_EDGE,
+		MIRRORED_REPEAT=GL_MIRRORED_REPEAT,
+		REPEAT=GL_REPEAT,
+		MIRROR_CLAMP_TO_EDGE=GL_MIRROR_CLAMP_TO_EDGE,
+	};
+	void setWrapS(WrapType type = WrapType::REPEAT) {
+		glSamplerParameteri(sampler_, GL_TEXTURE_WRAP_S, GLenum(type));
+	}
+	void setWrapT(WrapType type = WrapType::REPEAT) {
+		glSamplerParameteri(sampler_, GL_TEXTURE_WRAP_T, GLenum(type));
+	}
+	void setWrapR(WrapType type = WrapType::REPEAT) {
+		glSamplerParameteri(sampler_, GL_TEXTURE_WRAP_R, GLenum(type));
+	}
+
+	void setBorderColor(float r=0,float g=0,float b=0,float a=0) {
+		const float v__[]{r,g,b,a};
+		glSamplerParameterfv(sampler_, GL_TEXTURE_BORDER_COLOR,v__);
+	}
+
+	enum class CompareFunction : GLenum {
+		LEQUAL=GL_LEQUAL,
+		GEQUAL=GL_GEQUAL,
+		LESS=GL_LESS,
+		GREATER=GL_GREATER,
+		EQUAL=GL_EQUAL,
+		NOTEQUAL=GL_NOTEQUAL,
+		ALWAYS=GL_ALWAYS,
+		NEVER=GL_NEVER,
+	};
+	void setCompareFunction(CompareFunction type = CompareFunction::LEQUAL) {
+		glSamplerParameteri(sampler_, GL_TEXTURE_COMPARE_FUNC, GLenum(type));
+	}
+
+	enum class CompareMode:GLenum {
+		TEXTURE_COMPARE_MODE=GL_TEXTURE_COMPARE_MODE,
+		NONE = GL_NONE
+	};
+	void setCompareMode(CompareMode type = CompareMode::TEXTURE_COMPARE_MODE) {
+		glSamplerParameteri(sampler_, GL_TEXTURE_COMPARE_MODE, GLenum(type));
+	}
 };
 
 }
@@ -96,3 +133,6 @@ public:
 
 
 #endif
+
+
+
