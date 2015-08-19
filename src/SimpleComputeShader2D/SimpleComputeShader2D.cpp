@@ -62,8 +62,8 @@ if(false==dataInit){
 		float value__ = 0;
 		for (int j = 0; j < width;++j) {
 			*data_ = std::abs( std::sin(value__) *0.85f+0.05f );
-			value__ += 0.01;
-			constexpr float pi2__ = 2 * 3.141592654f;
+			value__ += 0.01f;
+			constexpr const float pi2__ = 2 * 3.141592654f;
 			if (value__ > pi2__) { value__ -= pi2__; }
 			++data_;
 		}
