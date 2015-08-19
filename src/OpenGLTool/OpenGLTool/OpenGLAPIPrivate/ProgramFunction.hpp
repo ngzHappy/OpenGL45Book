@@ -55,6 +55,10 @@ easy use function
 #include "PrivateTCTES.hpp"
 #include "PrivateTES.hpp"
 
+#include "PrivateVGFSourceLoader.hpp"
+#include "PrivateTCTEGS.hpp"
+#include "PrivateTEGS.hpp"
+
 
 
 #endif

@@ -76,7 +76,10 @@ HEADERS += \
     OpenGLTool/OpenGLAPIPrivate/PrivateComputeSourceLoader.hpp \
     OpenGLTool/OpenGLAPIPrivate/DispatchCompute.hpp \
     OpenGLTool/OpenGLAPIPrivate/PrivateTCTES.hpp \
-    OpenGLTool/OpenGLAPIPrivate/PrivateTES.hpp
+    OpenGLTool/OpenGLAPIPrivate/PrivateTES.hpp \
+    OpenGLTool/OpenGLAPIPrivate/PrivateTCTEGS.hpp \
+    OpenGLTool/OpenGLAPIPrivate/PrivateTEGS.hpp \
+    OpenGLTool/OpenGLAPIPrivate/PrivateVGFSourceLoader.hpp
 
 SOURCES += \
     glew.c \
