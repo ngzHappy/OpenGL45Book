@@ -1,5 +1,5 @@
-﻿#ifndef __PRIVATE__TES__0x00__
-#define __PRIVATE__TES__0x00__
+﻿#ifndef __PRIVATE__TES_g_0x00__
+#define __PRIVATE__TES_g_0x00__
 
 #include "ProgramFunction.hpp"
 #include <memory>
@@ -14,9 +14,10 @@
 
 namespace gl {
 
-	static inline Program VTEFProgramLoadSources(
+    static inline Program VTEGFProgramLoadSources(
 		const std::string & vFile,
 		const std::string & teFile,
+        const std::string & gFile,
 		const std::string & fFile
 		) {
 
@@ -184,27 +185,30 @@ namespace gl {
 
 	}
 
-	static inline Program VTEFProgramLoadSources(
+    static inline Program VTEGFProgramLoadSources(
 		const char * vFile,
 		const char * teFile,
+        const char * gFile,
 		const char * fFile
 		) {
-		return VTEFProgramLoadSources(
+        return VTEGFProgramLoadSources(
 			std::string(vFile),
 			std::string(teFile),
+            std::string(gFile),
 			std::string(fFile)
 			);
 	}
 
-	static inline Program VTEFProgamLoad(
+    static inline Program VTEGFProgamLoad(
 		const std::string & v_name,
 		const std::string & te_name,
+        const std::string & g_name,
 		const std::string & f_name
 		) {
 		std::string   vFile;
 		std::string   teFile;
 		std::string   fFile;
-
+        std::string   gFile;
 		//30K
 		vFile.reserve(1024 * 30);
 		fFile.reserve(1024 * 30);
@@ -270,30 +274,33 @@ namespace gl {
 			}
 		}
 
-		return VTEFProgramLoadSources(
+        return VTEGFProgramLoadSources(
 			vFile,
 			teFile,
+            gFile,
 			fFile
 			);
 	}
 
-	static inline Program VTEFProgamLoad(
+    static inline Program VTEGFProgamLoad(
 		const char * v_name,
 		const char * te_name,
+        const char * g_name,
 		const char * f_name
 		) {
 		typedef std::string T;
-		return VTEFProgamLoad(
-			T(v_name),  T(te_name), T(f_name)
+        return VTEGFProgamLoad(
+            T(v_name),  T(te_name),T(g_name), T(f_name)
 			);
 	}
 
 
 #ifdef QT_CORE_LIB
 
-	static inline Program VTEFProgamLoad(
+    static inline Program VTEGFProgamLoad(
 		const QString & v_name,
 		const QString & te_name,
+        const QString & g_name,
 		const QString & f_name
 		) {
 
@@ -301,15 +308,16 @@ namespace gl {
 			return std::move(x.toLocal8Bit().toStdString());
 		};
 
-		return VTEFProgamLoad(
-			T(v_name),  T(te_name), T(f_name)
+        return VTEGFProgamLoad(
+            T(v_name),  T(te_name),T(g_name), T(f_name)
 			);
 
 	}
 
-	static inline Program VTEFProgramLoadSources(
+    static inline Program VTEGFProgramLoadSources(
 		const QString & vFile,
 		const QString & teFile,
+        const QString & gFile,
 		const QString & fFile
 		) {
 
@@ -317,8 +325,8 @@ namespace gl {
 			return std::move(x.toLocal8Bit().toStdString());
 		};
 
-		return VTEFProgramLoadSources(
-			T(vFile), T(teFile), T(fFile)
+        return VTEGFProgramLoadSources(
+            T(vFile), T(teFile),T(gFile), T(fFile)
 			);
 
 	}
