@@ -8,6 +8,7 @@
 #include <OpenGLTool/ModelLoader.hpp>
 #include <OpenGLTool/ModelLoaderCallbacks.hpp>
 #include <QFileInfo>
+#include <cstdlib>
 namespace  {
 enum Type :unsigned int {
     Texture = 1,
@@ -117,7 +118,7 @@ int main(int argc,char ** argv){
 
 
     eval_command(command );
-
+    std::quick_exit(0);
 return 0;
 }
 
