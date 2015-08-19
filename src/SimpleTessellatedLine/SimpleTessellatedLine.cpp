@@ -20,12 +20,11 @@ public:
 /****************************************************/
     ~ThisPrivate(){}
     void initializeGL(){
-
-        glClearDepth(1);
-        glClearColor(0,0,0,0);
+glClearDepth(1);
+glClearColor(0,0,0,0);
     #ifdef _DEBUG_OPENGL_QT_
-            QGLDebugTool::setSimpleCallbackFunction();
-            QGLDebugTool::test();
+QGLDebugTool::setSimpleCallbackFunction();
+QGLDebugTool::test();
     #endif
 
  }

@@ -6,6 +6,7 @@
 #include "VertexArrayType.hpp"
 #include "TexttureOpenglTool.hpp"
 #include "FBOTypeGL.hpp"
+#include "array"
 
 namespace gl {
 
@@ -126,7 +127,63 @@ GL_R8_SNORM
 	static inline void patchVertices(GLint value = 3) {
 		glPatchParameteri(GL_PATCH_VERTICES, value);
 	}
+/*
+细分着色器
+*/
+	class PatchLevels {
+	public:
+		PatchLevels(
+			const std::array<gl::Float, 4> & outer,
+			const std::array<gl::Float, 4> & inner
+			) :outer_level_array(outer),
+			inner_level_array(inner){}
+
+		PatchLevels(
+			const std::array<gl::Float, 4> & outer
+			) :outer_level_array(outer),
+			inner_level_array(outer) {}
+
+		PatchLevels(
+			const std::array<gl::Float, 3> & outer,
+			const gl::Float  & inner
+			) :outer_level_array({ outer[0], outer[1], outer[2], outer[2] }),
+			inner_level_array({ inner ,inner ,inner ,inner  }) {}
+
+		union {
+			gl::Float outer_levels[4];
+			std::array<gl::Float, 4> outer_level_array;
+			struct {
+				gl::Float outer_level_0;
+				gl::Float outer_level_1;
+				gl::Float outer_level_2;
+				gl::Float outer_level_3;
+			};
+		};
+		union {
+			gl::Float inner_levels[4];
+			std::array<gl::Float, 4> inner_level_array;
+			struct {
+				gl::Float inner_level_0;
+				gl::Float inner_level_1;
+				gl::Float inner_level_2;
+				gl::Float inner_level_3;
+			};
+		};
+		
+		PatchLevels() :PatchLevels({ 2,2,2,2 }, {2,2,2,2}){
+		}
+		 
+	};
+
+
+
+	static inline void patchLevels( const PatchLevels & levels ) {
+		glPatchParameterfv(GL_PATCH_DEFAULT_OUTER_LEVEL, levels.outer_levels);
+		glPatchParameterfv(GL_PATCH_DEFAULT_INNER_LEVEL, levels.inner_levels);
+	}
 };
+
+typedef __UnNamedObject::PatchLevels PatchLevels;
 
 }
 #endif
