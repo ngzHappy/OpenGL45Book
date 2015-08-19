@@ -10,7 +10,7 @@
 #include <fstream>
 #include <array>
 #include <iostream>
-
+#include "PrivateTES.hpp"
 
 namespace gl {
 
@@ -156,7 +156,7 @@ static inline Program VTCTEFProgramLoadSources (
                 printErrorDetail(shader[1]);
                 return Program();
             }
-            GLint testVal;
+    
             glGetShaderiv(shader[2], GL_COMPILE_STATUS, &testVal);
             if (testVal == GL_FALSE) {
                 printErrorDetail(shader[2]);
@@ -206,11 +206,11 @@ static inline Program VTCTEFProgramLoadSources (
         const char * teFile,
         const char * fFile
         ){
-    VTCTEFProgramLoadSources(
+    return VTCTEFProgramLoadSources(
                 std::string(vFile),
                 std::string(tcFile),
                 std::string(teFile),
-                std::string(fFile),
+                std::string(fFile)
                 );
 }
 
@@ -226,7 +226,10 @@ static inline Program VTCTEFProgamLoad(
     std::string   fFile ;
 
     //30K
-    cFile.reserve(1024*30);
+    vFile.reserve(1024*30);
+	fFile.reserve(1024 * 30);
+	teFile.reserve(1024 * 30);
+	tcFile.reserve(1024 * 30);
 
     {
         std::ifstream ifs(v_name);
@@ -270,7 +273,7 @@ static inline Program VTCTEFProgamLoad(
     }
 
     {
-        std::ifstream ifs(f_name);
+        std::ifstream ifs(te_name);
         if(false==ifs.is_open()){return Program();}
         std::string line;
         std::getline(ifs, line);
@@ -290,7 +293,7 @@ static inline Program VTCTEFProgamLoad(
     }
 
     {
-        std::ifstream ifs(v_name);
+        std::ifstream ifs(f_name);
         if(false==ifs.is_open()){return Program();}
         std::string line;
         std::getline(ifs, line);
@@ -299,13 +302,13 @@ static inline Program VTCTEFProgamLoad(
                 (line[0]== VType(0xef)) &&
                 (line[1] == VType(0xbb)) &&
                 (line[2] == VType(0xbf))) {
-            vFile += std::string(line.begin()+3,line.end()) + "\n";
+            fFile += std::string(line.begin()+3,line.end()) + "\n";
         }
         else {
-            vFile += line + "\n";
+            fFile += line + "\n";
         }
         while (std::getline(ifs,line)) {
-            vFile+=line+"\n";
+            fFile+=line+"\n";
         }
     }
 

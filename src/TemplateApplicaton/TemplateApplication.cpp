@@ -38,8 +38,9 @@ virtual void resizeGL(int w, int h)override;
 const QString cppFile = QString::fromUtf8(u8R"(/*utf8 with bom*/
 #include <OpenGLTool/OpenGLAPI.hpp>
 #include <OpenGLTool/QGLTools.hpp>
-#include "${CLASSNAME}.hpp"
 #include <memory>
+#include "${CLASSNAME}.hpp"
+
 #ifdef QT_DEBUG
 #ifndef _DEBUG_OPENGL_QT_
 #define _DEBUG_OPENGL_QT_
@@ -57,13 +58,12 @@ public:
 /****************************************************/
     ~ThisPrivate(){}
     void initializeGL(){
-
-        glClearDepth(1);
-        glClearColor(0,0,0,0);
-    #ifdef _DEBUG_OPENGL_QT_
-            QGLDebugTool::setSimpleCallbackFunction();
-            QGLDebugTool::test();
-    #endif
+glClearDepth(1);
+glClearColor(0,0,0,0);
+#ifdef _DEBUG_OPENGL_QT_
+QGLDebugTool::setSimpleCallbackFunction();
+QGLDebugTool::test();
+#endif
 
  }
     void paintGL(){

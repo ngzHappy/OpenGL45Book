@@ -120,7 +120,12 @@ GL_R8_SNORM
 			level,layered,layer,
 			access,format);
 	}
-
+/*
+细分着色器
+*/
+	static inline void patchVertices(GLint value = 3) {
+		glPatchParameteri(GL_PATCH_VERTICES, value);
+	}
 };
 
 }

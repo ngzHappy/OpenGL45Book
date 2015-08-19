@@ -127,6 +127,16 @@ APPTessellatedCube.depends+=SLIBOpenGLTool
 APPTessellatedLine.file= $$PWD/TessellatedLine/TessellatedLine.pro
 APPTessellatedLine.depends+=SLIBOpenGLTool
 
+APPSimpleTessellatedTriangle.file= $$PWD/SimpleTessellatedTriangle/SimpleTessellatedTriangle.pro
+APPSimpleTessellatedTriangle.depends+=SLIBOpenGLTool
+
+APPSimpleTessellatedCube.file= $$PWD/SimpleTessellatedCube/SimpleTessellatedCube.pro
+APPSimpleTessellatedCube.depends+=SLIBOpenGLTool
+
+APPSimpleTessellatedLine.file= $$PWD/SimpleTessellatedLine/SimpleTessellatedLine.pro
+APPSimpleTessellatedLine.depends+=SLIBOpenGLTool
+
+
 SUBDIRS += APPVoidTest
 SUBDIRS += LIBAssimp
 SUBDIRS += SLIBOpenGLTool
@@ -169,6 +179,33 @@ SUBDIRS += APPSimpleComputeShader2D
 SUBDIRS += APPTessellatedTriangle
 SUBDIRS += APPTessellatedCube
 SUBDIRS += APPTessellatedLine
+SUBDIRS += APPSimpleTessellatedTriangle
+SUBDIRS += APPSimpleTessellatedCube
+SUBDIRS += APPSimpleTessellatedLine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

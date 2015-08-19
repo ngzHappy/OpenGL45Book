@@ -49,9 +49,13 @@ inline void useProgram(Program program){
 easy use function 
 易用API接口
 */
-#include "PrivateVFSourceLoader.hpp"
 #include "PrivateComputeSourceLoader.hpp"
+
+#include "PrivateVFSourceLoader.hpp"
 #include "PrivateTCTES.hpp"
+#include "PrivateTES.hpp"
+
+
 
 #endif
 
