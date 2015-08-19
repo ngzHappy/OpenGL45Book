@@ -60,12 +60,12 @@ layout(vertices=3) out ;
 in  vec4 color_0_[];
 out vec4 color_1_[];
 void main(){
-if (gl_InvocationID == 0){
+ 
 gl_TessLevelInner[0] = 5.0;
 gl_TessLevelOuter[0] = 6.0;
 gl_TessLevelOuter[1] = 7.0;
 gl_TessLevelOuter[2] = 8.0;
-}
+ 
 gl_out[gl_InvocationID].gl_Position=gl_in[gl_InvocationID].gl_Position;
 color_1_[gl_InvocationID]= color_0_[gl_InvocationID];
 }
