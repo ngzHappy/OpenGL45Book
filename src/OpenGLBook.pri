@@ -118,6 +118,15 @@ APPSimpleComputeShader.depends+=SLIBOpenGLTool
 APPSimpleComputeShader2D.file= $$PWD/SimpleComputeShader2D/SimpleComputeShader2D.pro
 APPSimpleComputeShader2D.depends+=SLIBOpenGLTool
 
+APPTessellatedTriangle.file= $$PWD/TessellatedTriangle/TessellatedTriangle.pro
+APPTessellatedTriangle.depends+=SLIBOpenGLTool
+
+APPTessellatedCube.file= $$PWD/TessellatedCube/TessellatedCube.pro
+APPTessellatedCube.depends+=SLIBOpenGLTool
+
+APPTessellatedLine.file= $$PWD/TessellatedLine/TessellatedLine.pro
+APPTessellatedLine.depends+=SLIBOpenGLTool
+
 SUBDIRS += APPVoidTest
 SUBDIRS += LIBAssimp
 SUBDIRS += SLIBOpenGLTool
@@ -157,9 +166,9 @@ SUBDIRS += APPSpider
 SUBDIRS += APPModelView
 SUBDIRS += APPSimpleComputeShader
 SUBDIRS += APPSimpleComputeShader2D
-
-
-
+SUBDIRS += APPTessellatedTriangle
+SUBDIRS += APPTessellatedCube
+SUBDIRS += APPTessellatedLine
 
 
 
