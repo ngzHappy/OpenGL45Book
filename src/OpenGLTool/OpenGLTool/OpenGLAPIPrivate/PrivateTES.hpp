@@ -72,7 +72,7 @@ namespace gl {
 
 			class ShaderFree {
 			public:
-				std::array<GLuint, 4> data;
+				std::array<GLuint, 3> data;
 				ShaderFree() {
 					data[0] = 0;
 					data[1] = 0;

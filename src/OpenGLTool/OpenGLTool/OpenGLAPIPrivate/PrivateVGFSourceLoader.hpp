@@ -72,14 +72,16 @@ static inline Program VGFProgramLoadSources (
 
 		class ShaderFree{
 		public:
-			std::array<GLuint, 2> data ;
+			std::array<GLuint, 3> data ;
 			ShaderFree() {
 				data[0] = 0;
 				data[1] = 0;
+				data[2] = 0;
 			}
 			~ShaderFree() {
 				glDeleteShader(data[1]);
 				glDeleteShader(data[0]);
+				glDeleteShader(data[2]);
 			}
 		}shaders;
 
@@ -92,26 +94,38 @@ static inline Program VGFProgramLoadSources (
                 return Program();
 			}
 
-			shader[1] = glCreateShader(GL_FRAGMENT_SHADER);
-			if (0 == (shader[1])) {
+			shader[2] = glCreateShader(GL_FRAGMENT_SHADER);
+			if (0 == (shader[2])) {
 				printError("GL_FRAGMENT_SHADER not surported!");
                 return Program();
+			}
+
+			shader[1] = glCreateShader(GL_GEOMETRY_SHADER);
+			if (0 == (shader[1])) {
+				printError("GL_GEOMETRY_SHADER not surported!");
+				return Program();
 			}
 		}//1
 
 		{//2
-			const GLchar * sources[] = {vFile.c_str(),fFile.c_str() };
+			const GLchar * sources[] = {
+				vFile.c_str(),
+				gFile.c_str(),
+				fFile.c_str() 
+			};
 			GLint lengths[] = {
 				(GLint)(vFile.size()),
+				(GLint)(gFile.size()),
 				(GLint)(fFile.size())
 			};
 
 			glShaderSource(shader[0], 1, &sources[0], &lengths[0]);
 			glShaderSource(shader[1], 1, &sources[1], &lengths[1]);
+			glShaderSource(shader[2], 1, &sources[2], &lengths[2]);
 
 			glCompileShader(shader[0]);
 			glCompileShader(shader[1]);
-
+			glCompileShader(shader[2]);
 		}//2
 
 		{//3
@@ -126,6 +140,11 @@ static inline Program VGFProgramLoadSources (
 				printErrorDetail(shader[1]);
                 return Program();
 			}
+			glGetShaderiv(shader[2], GL_COMPILE_STATUS, &testVal);
+			if (testVal == GL_FALSE) {
+				printErrorDetail(shader[2]);
+				return Program();
+			}
 		}//3
 
 		GLuint program = glCreateProgram();
@@ -136,6 +155,7 @@ static inline Program VGFProgramLoadSources (
 
 		glAttachShader(program, shader[0]);
 		glAttachShader(program, shader[1]);
+		glAttachShader(program, shader[2]);
 		glLinkProgram(program);
 
 		{
@@ -183,6 +203,23 @@ static inline Program VGFProgamLoad(
             vFile+=line+"\n";
         }
     }
+
+	{
+		std::ifstream ifs(g_name);
+		if (false == ifs.is_open()) { return Program(); }
+		std::string line;
+		std::getline(ifs, line);
+		typedef   std::string::value_type VType;
+		if ((line.size() >= 3) && (line[0] == VType(0xef)) && (line[1] == VType(0xbb)) && (line[2] == VType(0xbf))) {
+			gFile += std::string(line.begin() + 3, line.end()) + "\n";
+		}
+		else {
+			gFile += line + "\n";
+		}
+		while (std::getline(ifs, line)) {
+			gFile += line + "\n";
+		}
+	}
 
     {
         std::ifstream ifs(f_name);

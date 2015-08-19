@@ -139,6 +139,9 @@ APPSimpleTessellatedLine.depends+=SLIBOpenGLTool
 APPSimpleGeometry.file= $$PWD/SimpleGeometry/SimpleGeometry.pro
 APPSimpleGeometry.depends+=SLIBOpenGLTool
 
+APPSimpleGeometryViewportIndex.file=$$PWD/SimpleGeometryViewportIndex/SimpleGeometryViewportIndex.pro
+APPSimpleGeometryViewportIndex.depends+=SLIBOpenGLTool
+
 SUBDIRS += APPVoidTest
 SUBDIRS += LIBAssimp
 SUBDIRS += SLIBOpenGLTool
@@ -185,7 +188,7 @@ SUBDIRS += APPSimpleTessellatedTriangle
 SUBDIRS += APPSimpleTessellatedCube
 SUBDIRS += APPSimpleTessellatedLine
 SUBDIRS += APPSimpleGeometry
-
+SUBDIRS += APPSimpleGeometryViewportIndex
 
 
 

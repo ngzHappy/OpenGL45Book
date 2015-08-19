@@ -68,7 +68,8 @@ namespace gl {
 			enum {
 				VS__ = 0,
 				TE__ = 1,
-				FS__ = 2
+				GS__ = 2,
+				FS__ = 3
 			};
 
 			class ShaderFree {
@@ -78,11 +79,13 @@ namespace gl {
 					data[0] = 0;
 					data[1] = 0;
 					data[2] = 0;
+					data[3] = 0;
 				}
 				~ShaderFree() {
 					glDeleteShader(data[VS__]);
 					glDeleteShader(data[TE__]);
 					glDeleteShader(data[FS__]);
+					glDeleteShader(data[GS__]);
 				}
 			}shaders;
 
@@ -109,28 +112,36 @@ namespace gl {
 					printError("GL_FRAGMENT_SHADER not surported!");
 					return Program();
 				}
+
+				shader[GS__] = glCreateShader(GL_GEOMETRY_SHADER);
+				if (0 == (shader[GS__])) {
+					printError("GL_GEOMETRY_SHADER not surported!");
+					return Program();
+				}
 			}//1
 
 			{//2
 				const GLchar * sources[] = {
 					vFile.c_str(),
 					teFile.c_str(),
+					gFile.c_str(),
 					fFile.c_str() };
 
 				GLint lengths[] = {
 					(GLint)(vFile.size()),
 					(GLint)(teFile.size()),
+					(GLint)(gFile.size()),
 					(GLint)(fFile.size())
 				};
 
 				glShaderSource(shader[0], 1, &sources[0], &lengths[0]);
 				glShaderSource(shader[1], 1, &sources[1], &lengths[1]);
 				glShaderSource(shader[2], 1, &sources[2], &lengths[2]);
-
+				glShaderSource(shader[3], 1, &sources[3], &lengths[3]);
 				glCompileShader(shader[0]);
 				glCompileShader(shader[1]);
 				glCompileShader(shader[2]);
-
+				glCompileShader(shader[3]);
 			}//2
 
 
@@ -152,6 +163,12 @@ namespace gl {
 					printErrorDetail(shader[2]);
 					return Program();
 				}
+
+				glGetShaderiv(shader[3], GL_COMPILE_STATUS, &testVal);
+				if (testVal == GL_FALSE) {
+					printErrorDetail(shader[3]);
+					return Program();
+				}
  
 			}//3
 
@@ -164,6 +181,7 @@ namespace gl {
 			glAttachShader(program, shader[0]);
 			glAttachShader(program, shader[1]);
 			glAttachShader(program, shader[2]);
+			glAttachShader(program, shader[3]);
 			glLinkProgram(program);
 
 			{
@@ -253,6 +271,27 @@ namespace gl {
 				teFile += line + "\n";
 			}
 		}
+
+		{
+			std::ifstream ifs(g_name);
+			if (false == ifs.is_open()) { return Program(); }
+			std::string line;
+			std::getline(ifs, line);
+			typedef   std::string::value_type VType;
+			if ((line.size() >= 3) &&
+				(line[0] == VType(0xef)) &&
+				(line[1] == VType(0xbb)) &&
+				(line[2] == VType(0xbf))) {
+				gFile += std::string(line.begin() + 3, line.end()) + "\n";
+			}
+			else {
+				gFile += line + "\n";
+			}
+			while (std::getline(ifs, line)) {
+				gFile += line + "\n";
+			}
+		}
+
 
 		{
 			std::ifstream ifs(f_name);
