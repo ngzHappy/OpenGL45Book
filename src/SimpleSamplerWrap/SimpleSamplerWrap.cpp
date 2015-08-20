@@ -50,9 +50,9 @@ tuv = (gl_Position.xy+0.5)  /*[-0.5,1.5]*/ ;
         constexpr static char fs[] = R"f(#version 450
 smooth in vec2 tuv;
 out vec4 color ;
-layout(binding=0) uniform sampler2DRect  stex;
+layout(binding=0) uniform sampler2D   stex;
 void main(){
-color = texture( stex, tuv*textureSize(stex) );
+color = texture( stex, tuv  );
 }
 )f" ;
         data->program = gl::VFProgramLoadSources(vs,fs);
@@ -110,7 +110,7 @@ gl::createSamplers(1, &sampler0);
 gl::createSamplers(1, &sampler1);
 
 {
-    texture = gl::createTexture2D(":/image/testImage.jpg", GL_TEXTURE_RECTANGLE );
+    texture = gl::createTexture2D(":/image/testImage.jpg", GL_TEXTURE_2D );
 }
 
 {

@@ -145,6 +145,9 @@ APPSimpleGeometryViewportIndex.depends+=SLIBOpenGLTool
 APPSimpleSamplerWrap.file=$$PWD/SimpleSamplerWrap/SimpleSamplerWrap.pro
 APPSimpleSamplerWrap+=SLIBOpenGLTool
 
+APPSimpleSamplerWrapRectangle.file=$$PWD/SimpleSamplerWrapRectangle/SimpleSamplerWrapRectangle.pro
+APPSimpleSamplerWrapRectangle+=SLIBOpenGLTool
+
 SUBDIRS += APPVoidTest
 SUBDIRS += LIBAssimp
 SUBDIRS += SLIBOpenGLTool
@@ -193,7 +196,7 @@ SUBDIRS += APPSimpleTessellatedLine
 SUBDIRS += APPSimpleGeometry
 SUBDIRS += APPSimpleGeometryViewportIndex
 SUBDIRS += APPSimpleSamplerWrap
-
+SUBDIRS += APPSimpleSamplerWrapRectangle
 
 
 
