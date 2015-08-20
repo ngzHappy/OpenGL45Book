@@ -131,7 +131,7 @@ GL_R8_SNORM
 			access,format);
 	}
 
-	void bindSampler(GLuint location, const NamedSamplerObject & nso_) {
+	static inline void bindSampler(GLuint location, const NamedSamplerObject & nso_) {
 		nso_.bind(location);
 	}
 

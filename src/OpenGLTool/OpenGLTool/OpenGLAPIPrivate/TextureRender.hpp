@@ -36,7 +36,7 @@ gl_Position = points[gl_VertexID];
 tuv = gl_Position.xy/2+0.5;
 }
 )";
-		constexpr static char fs[] = R"(#version 450
+        constexpr static char fs[] = R"f(#version 450
 smooth in vec2 tuv;
 out vec4 color ;
 layout(binding=0) uniform sampler2DRect stex; 
@@ -44,7 +44,7 @@ void main(){
 ivec2 ts = textureSize(stex);
 color = texelFetch( stex,ivec2(ts*tuv) );
 }
-)";
+)f";
 		data->program = gl::VFProgramLoadSources(vs,fs);
 		gl::createVertexArrays(1, &(data->vao));
     }

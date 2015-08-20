@@ -115,10 +115,10 @@ static inline void bindTexture(
 		glGenTextures(1, &texture);
 		if (0 == texture){ return ans; }
         glBindTexture(tar,texture);
-        glTexParameteri(tar, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(tar, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(tar, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // Linear Min Filter
-        glTexParameteri(tar, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Linear Mag Filter
+        //glTexParameteri(tar, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        //glTexParameteri(tar, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        //glTexParameteri(tar, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // Linear Min Filter
+        //glTexParameteri(tar, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Linear Mag Filter
 		glTexImage2D(
             tar, 0, GL_RGBA,
 			image.width(), image.height(), 0, 
@@ -143,8 +143,8 @@ static inline void bindTexture(
 		glTextureStorage2D(
 			texture, 1, GL_RGBA8, width,  height 
              );
-		glTextureParameteri(texture, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		//glTextureParameteri(texture, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		//glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		//glTextureParameteri(texture, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // Linear Min Filter
 		//glTextureParameteri(texture, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Linear Mag Filter
 		glTextureSubImage2D(
@@ -267,8 +267,8 @@ GL_UNSIGNED_INT_2_10_10_10_REV.
         glTextureStorage2D(
             texture, 1, internalformat, width,  height
              );
-        glTextureParameteri(texture, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        //glTextureParameteri(texture, GL_TEXTURE_WRAP_S, GL_REPEAT);
+       // glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_REPEAT);
         //glTextureParameteri(texture, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // Linear Min Filter
         //glTextureParameteri(texture, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Linear Mag Filter
         if(data){
