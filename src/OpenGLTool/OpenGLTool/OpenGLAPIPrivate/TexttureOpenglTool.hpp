@@ -190,6 +190,20 @@ gsampler2DMSArray​ 	GL_TEXTURE_2D_MULTISAMPLE_ARRAY 	Multisample Array Texture
                             GLuint(buffer)
                             );
             }
+
+			void bind(
+				InternalFormat  internalformat,
+				gl::NamedBuffer buffer,
+				GLintptr offset,
+				GLsizei size
+				) {
+glTextureBufferRange(texture_,
+					GLenum(internalformat),
+					GLuint(buffer),
+					GLintptr(offset),
+					GLsizei(size));
+			}
+
     };
 
 
