@@ -18,12 +18,10 @@ public:
 }
 /****************************************************/
 /****************************************************/
-	gl::Program program;
-	gl::NamedVertexArrayObject vao;
-	gl::NamedBuffer pointsBuffer;
+	gl::ProgramPointer program;
+	gl::NamedVertexArrayObjectPointer vao;
+	gl::NamedBufferPointer pointsBuffer;
 	~ThisPrivate() {
-		gl::deleteAny(pointsBuffer, vao);
-		gl::deleteAny(program);
 	}
 	void initializeGL() {
 		glClearDepth(1);
@@ -32,16 +30,16 @@ public:
 		QGLDebugTool::setSimpleCallbackFunction();
 		QGLDebugTool::test();
 #endif
-		gl::createVertexArrays(1, &vao);
-		gl::createBuffers(1, &pointsBuffer);
+		pointsBuffer = gl::create<gl::NamedBuffer>( );
+		vao = gl::create<gl::NamedVertexArrayObject>( );
 		constexpr static const gl::Float points[] = {
 			-0.5f,-0.5f,0,1,
 			 0.5f,-0.5f,0,1,
 			-0.5f, 0.5f,0,1,
 			 0.5f, 0.5f,0,1,
 		};
-		gl::bufferData(pointsBuffer, sizeof(points), points);
-		vao.bindBuffer(0, pointsBuffer);
+		gl::bufferData( *pointsBuffer, sizeof(points), points);
+		vao->bindBuffer(0, *pointsBuffer );
 
 		constexpr static const char vs[] = R"(#version 450 core 
 layout(location=0) in vec4 iposition ;
@@ -109,8 +107,8 @@ void main(){
 fcolor = color_2_;
 }
 )";
-
-		program = gl::VTCTEFProgramLoadSources(vs, tcs, tes, fs);
+		program = gl::create<gl::Program>();
+		*program = gl::VTCTEFProgramLoadSources(vs, tcs, tes, fs);
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -119,8 +117,8 @@ fcolor = color_2_;
 		{
 			using namespace gl::DrawArrays;
 			Pack pack(Mode::PATCHES, 0, 4 );
-			pack.useProgram(program);
-			pack.bindVertexArray(vao);
+			pack.useProgram(*program);
+			pack.bindVertexArray(*vao);
 			pack.patchVertices(4);
 			gl::draw(pack);
 		}

@@ -85,13 +85,14 @@ namespace gl {
 	class ObjectPointer  : 
 		public std::shared_ptr<T> {
 		typedef std::shared_ptr<T> SuperType;
-		static void _deleteObjectFunction(T * d) {
+	public:
+		ObjectPointer() {}
+		using SuperType::SuperType;
+		static void deleteObjectFunction(T * d) {
 			if (d == 0) { return; }
 			gl::deleteAny(*d);
 			delete d;
 		}
-	public:
-		ObjectPointer() :SuperType(new T, &ObjectPointer::_deleteObjectFunction ) {}
 	};
 
 	template<typename T,typename ... Args>  ObjectPointer<T> create( Args... );
@@ -99,42 +100,54 @@ namespace gl {
 	template<> ObjectPointer<NamedBuffer> 
 		create<NamedBuffer>() {
 		typedef ObjectPointer<NamedBuffer> T;
-		T ans; gl::createBuffers(1, ans.get());
+		typedef T::element_type element_type;
+		T ans(new element_type,&T::deleteObjectFunction);
+		gl::createBuffers(1, ans.get());
 		return std::move(ans);
 	}
 
 	template<> ObjectPointer<NamedTexture> 
 		create<NamedTexture, gl::CreateTexturesTarget>( gl::CreateTexturesTarget tar ) {
 		typedef ObjectPointer<NamedTexture> T;
-		T ans; gl::createTextures(tar,1, ans.get());
+		typedef T::element_type element_type;
+		T ans(new element_type, &T::deleteObjectFunction);
+		gl::createTextures(tar,1, ans.get());
 		return std::move(ans);
 	}
 
 	template<> ObjectPointer<NamedSamplerObject> 
 		create<NamedSamplerObject>() {
 		typedef ObjectPointer<NamedSamplerObject> T;
-		T ans; gl::createSamplers(1, ans.get());
+		typedef T::element_type element_type;
+		T ans(new element_type, &T::deleteObjectFunction);
+		gl::createSamplers(1, ans.get());
 		return std::move(ans);
 	}
 
 	template<> ObjectPointer<NamedVertexArrayObject> 
 		create<NamedVertexArrayObject>() {
 		typedef ObjectPointer<NamedVertexArrayObject> T;
-		T ans; gl::createVertexArrays(1, ans.get());
+		typedef T::element_type element_type;
+		T ans(new element_type, &T::deleteObjectFunction);
+		gl::createVertexArrays(1, ans.get());
 		return std::move(ans);
 	}
 
 	template<> ObjectPointer<Program> 
 		create<Program>() {
 		typedef ObjectPointer<Program> T;
-		T ans; *ans = gl::createProgram();
+		typedef T::element_type element_type;
+		T ans(new element_type, &T::deleteObjectFunction);
+		*ans = gl::createProgram();
 		return std::move(ans);
 	}
 
 	template<> ObjectPointer<NamedFrameBufferObject> 
 		create<NamedFrameBufferObject>() {
 		typedef ObjectPointer<NamedFrameBufferObject> T;
-		T ans; gl::createFrameBuffers(1, ans.get());
+		typedef T::element_type element_type;
+		T ans(new element_type, &T::deleteObjectFunction);
+		gl::createFrameBuffers(1, ans.get());
 		return std::move(ans);
 	}
 
