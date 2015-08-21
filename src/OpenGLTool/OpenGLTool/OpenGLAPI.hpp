@@ -80,13 +80,23 @@ inline void deleteAny( const T0 & a0,  const Args &...args) {
 }
 
 namespace gl {
+	template<typename T>
+	class ObjectPointerStaticData {
+	protected:
+		static GLuint data;
+	};
+	template<typename T> GLuint ObjectPointerStaticData<T>::data = 0;
 
 	template<typename T>
 	class ObjectPointer  : 
-		public std::shared_ptr<T> {
-		typedef std::shared_ptr<T> SuperType;
+		public  std::unique_ptr<T, void(*)(T*)>,
+		private ObjectPointerStaticData<void>{
+		typedef void(*DeleteFunctionType)(T*);
+		typedef std::unique_ptr<T, void(*)(T*)> SuperType;
 	public:
-		ObjectPointer() {}
+		ObjectPointer() :SuperType(
+			(T *)(&ObjectPointerStaticData<void>::data), 
+			[](T*) {}) {}
 		using SuperType::SuperType;
 		static void deleteObjectFunction(T * d) {
 			if (d == 0) { return; }
@@ -138,7 +148,6 @@ namespace gl {
 		typedef ObjectPointer<Program> T;
 		typedef T::element_type element_type;
 		T ans(new element_type, &T::deleteObjectFunction);
-		*ans = gl::createProgram();
 		return std::move(ans);
 	}
 
@@ -157,6 +166,8 @@ namespace gl {
 	typedef ObjectPointer<NamedSamplerObject> NamedSamplerObjectPointer;
 	typedef ObjectPointer<NamedTexture> NamedTexturePointer;
 	typedef ObjectPointer<NamedBuffer> NamedBufferPointer;
+
+
 
 }
 
