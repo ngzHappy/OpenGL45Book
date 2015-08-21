@@ -2,6 +2,7 @@
 #define  __OPENGL_1_API__HPP__0x00
 
 #include <utility>
+#include <memory>
 #include "OpenGLAPIPrivate/OpenGLBase.hpp"
 #include "OpenGLAPIPrivate/BaseType.hpp"
 #include "OpenGLAPIPrivate/ProgramType.hpp"
@@ -43,9 +44,13 @@ inline void deleteAny(const Buffer & v ){
 inline void deleteAny(const Texture & v){
 	deleteTextures(1,&v);
 }
+inline void deleteAny(const SamplerObject & v) {
+	deleteSamplers(1, &v);
+}
 inline void deleteAny(const VertexArrayObject & v ){
     deleteVertexArrays(1,&v);
 }
+
 inline void deleteAny(const NamedBuffer & v ){
     deleteBuffers(1,&v);
 }
@@ -61,9 +66,7 @@ inline void deleteAny(const NamedFrameBufferObject & v){
 inline void deleteAny(const FrameBufferObject & v){
     deleteFramebuffers(1,&v);
 }
-inline void deleteAny(const SamplerObject & v){
-    deleteSamplers(1,&v);
-}
+
 inline void deleteAny(const NamedSamplerObject & v){
     deleteSamplers(1,&v);
 }
@@ -76,6 +79,73 @@ inline void deleteAny( const T0 & a0,  const Args &...args) {
 
 }
 
+namespace gl {
+
+	template<typename T>
+	class ObjectPointer  : 
+		public std::shared_ptr<T> {
+		typedef std::shared_ptr<T> SuperType;
+		static void _deleteObjectFunction(T * d) {
+			if (d == 0) { return; }
+			gl::deleteAny(*d);
+			delete d;
+		}
+	public:
+		ObjectPointer() :SuperType(new T, &ObjectPointer::_deleteObjectFunction ) {}
+	};
+
+	template<typename T,typename ... Args>  ObjectPointer<T> create( Args... );
+	
+	template<> ObjectPointer<NamedBuffer> 
+		create<NamedBuffer>() {
+		typedef ObjectPointer<NamedBuffer> T;
+		T ans; gl::createBuffers(1, ans.get());
+		return std::move(ans);
+	}
+
+	template<> ObjectPointer<NamedTexture> 
+		create<NamedTexture, gl::CreateTexturesTarget>( gl::CreateTexturesTarget tar ) {
+		typedef ObjectPointer<NamedTexture> T;
+		T ans; gl::createTextures(tar,1, ans.get());
+		return std::move(ans);
+	}
+
+	template<> ObjectPointer<NamedSamplerObject> 
+		create<NamedSamplerObject>() {
+		typedef ObjectPointer<NamedSamplerObject> T;
+		T ans; gl::createSamplers(1, ans.get());
+		return std::move(ans);
+	}
+
+	template<> ObjectPointer<NamedVertexArrayObject> 
+		create<NamedVertexArrayObject>() {
+		typedef ObjectPointer<NamedVertexArrayObject> T;
+		T ans; gl::createVertexArrays(1, ans.get());
+		return std::move(ans);
+	}
+
+	template<> ObjectPointer<Program> 
+		create<Program>() {
+		typedef ObjectPointer<Program> T;
+		T ans; *ans = gl::createProgram();
+		return std::move(ans);
+	}
+
+	template<> ObjectPointer<NamedFrameBufferObject> 
+		create<NamedFrameBufferObject>() {
+		typedef ObjectPointer<NamedFrameBufferObject> T;
+		T ans; gl::createFrameBuffers(1, ans.get());
+		return std::move(ans);
+	}
+
+	typedef ObjectPointer<NamedFrameBufferObject> NamedFrameBufferObjectPointer;
+	typedef ObjectPointer<Program> ProgramPointer;
+	typedef ObjectPointer<NamedVertexArrayObject> NamedVertexArrayObjectPointer;
+	typedef ObjectPointer<NamedSamplerObject> NamedSamplerObjectPointer;
+	typedef ObjectPointer<NamedTexture> NamedTexturePointer;
+	typedef ObjectPointer<NamedBuffer> NamedBufferPointer;
+
+}
 
 #endif
 
