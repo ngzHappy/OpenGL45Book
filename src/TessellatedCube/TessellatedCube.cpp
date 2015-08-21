@@ -107,8 +107,9 @@ void main(){
 fcolor = color_2_;
 }
 )";
-		program = gl::create<gl::Program>();
-		*program = gl::VTCTEFProgramLoadSources(vs, tcs, tes, fs);
+		program = gl::create<gl::Program>(
+			gl::VTCTEFProgramLoadSources(vs, tcs, tes, fs)
+			);
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
